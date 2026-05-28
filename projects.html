@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mintaka LLC project portfolio — FPGA and ASIC design and verification case studies." />
+  <title>Projects — Mintaka LLC</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <!-- Custom styles -->
+  <link href="css/style.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar navbar-expand-lg fixed-top" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand" href="index.html" aria-label="Mintaka LLC home">
+        <img src="assets/images/logo.png" alt="Mintaka LLC logo" class="logo-invert" />
+      </a>
+
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#mainNav"
+              aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link active" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== PROJECTS SECTION ===== -->
+  <section class="projects-section">
+
+    <!-- Banner strip -->
+    <div class="page-banner-strip" aria-hidden="true">
+      <img src="assets/images/banner.svg" alt="" class="page-banner-strip-img" />
+      <div class="page-banner-strip-overlay"></div>
+      <div class="page-banner-strip-title">PROJECTS</div>
+    </div>
+
+    <div class="container">
+
+      <div class="section-header reveal">
+        <h2>Projects</h2>
+        <div class="section-divider"></div>
+        <p>A selection of our FPGA and ASIC design and verification engagements.</p>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+        <!-- Project 1 -->
+        <div class="col reveal">
+          <div class="project-card">
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <i class="bi bi-cpu text-primary-mint" style="font-size:1.8rem;"></i>
+                <span class="status-badge status-completed">Completed</span>
+              </div>
+              <h5 class="card-title">PCIe Gen4 Controller IP</h5>
+              <p class="card-text flex-grow-1">
+                Designed a high-throughput PCIe Gen4 x8 controller in SystemVerilog targeting Xilinx UltraScale+ FPGA.
+                Full UVM testbench with protocol-compliance checks and error-injection coverage.
+              </p>
+              <div class="mt-auto pt-2">
+                <span class="tag-badge tag-primary">FPGA</span>
+                <span class="tag-badge tag-primary">PCIe Gen4</span>
+                <span class="tag-badge tag-primary">UVM</span>
+                <span class="tag-badge tag-secondary">SystemVerilog</span>
+                <span class="tag-badge tag-secondary">Vivado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="col reveal">
+          <div class="project-card">
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <i class="bi bi-shield-lock text-primary-mint" style="font-size:1.8rem;"></i>
+                <span class="status-badge status-completed">Completed</span>
+              </div>
+              <h5 class="card-title">AES-256 Crypto Accelerator</h5>
+              <p class="card-text flex-grow-1">
+                RTL implementation of an AES-256 hardware accelerator for an ASIC security chip.
+                Synthesised with Synopsys Design Compiler; achieved timing closure at 500 MHz in TSMC 28nm.
+              </p>
+              <div class="mt-auto pt-2">
+                <span class="tag-badge tag-primary">ASIC</span>
+                <span class="tag-badge tag-primary">AES-256</span>
+                <span class="tag-badge tag-primary">28nm</span>
+                <span class="tag-badge tag-secondary">VHDL</span>
+                <span class="tag-badge tag-secondary">Design Compiler</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="col reveal">
+          <div class="project-card">
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <i class="bi bi-reception-4 text-primary-mint" style="font-size:1.8rem;"></i>
+                <span class="status-badge status-completed">Completed</span>
+              </div>
+              <h5 class="card-title">DDR5 Memory Controller</h5>
+              <p class="card-text flex-grow-1">
+                Full UVM verification environment for a DDR5 memory controller subsystem.
+                Developed comprehensive scoreboard, response checker, and coverage model — achieving 98% functional coverage.
+              </p>
+              <div class="mt-auto pt-2">
+                <span class="tag-badge tag-primary">DDR5</span>
+                <span class="tag-badge tag-primary">UVM</span>
+                <span class="tag-badge tag-primary">Verification</span>
+                <span class="tag-badge tag-secondary">SystemVerilog</span>
+                <span class="tag-badge tag-secondary">VCS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="col reveal">
+          <div class="project-card">
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <i class="bi bi-hdd-network text-primary-mint" style="font-size:1.8rem;"></i>
+                <span class="status-badge status-ongoing">Ongoing</span>
+              </div>
+              <h5 class="card-title">Ethernet MAC 100G IP</h5>
+              <p class="card-text flex-grow-1">
+                Developing a 100G Ethernet MAC IP core in SystemVerilog for Intel Stratix 10 FPGA.
+                Target: line-rate processing with full IEEE 802.3 compliance verification.
+              </p>
+              <div class="mt-auto pt-2">
+                <span class="tag-badge tag-primary">FPGA</span>
+                <span class="tag-badge tag-primary">100G Ethernet</span>
+                <span class="tag-badge tag-primary">Stratix 10</span>
+                <span class="tag-badge tag-secondary">SystemVerilog</span>
+                <span class="tag-badge tag-secondary">Quartus</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="col reveal">
+          <div class="project-card">
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <i class="bi bi-diagram-3 text-primary-mint" style="font-size:1.8rem;"></i>
+                <span class="status-badge status-completed">Completed</span>
+              </div>
+              <h5 class="card-title">RISC-V Core FPGA Prototype</h5>
+              <p class="card-text flex-grow-1">
+                FPGA prototype of a custom 32-bit RISC-V core on Xilinx Zynq-7000 SoC.
+                Included AXI4 interconnect integration, bare-metal BSP, and in-system JTAG debug.
+              </p>
+              <div class="mt-auto pt-2">
+                <span class="tag-badge tag-primary">RISC-V</span>
+                <span class="tag-badge tag-primary">Zynq</span>
+                <span class="tag-badge tag-primary">FPGA Proto</span>
+                <span class="tag-badge tag-secondary">Verilog</span>
+                <span class="tag-badge tag-secondary">AXI4</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="col reveal">
+          <div class="project-card">
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <i class="bi bi-grid-3x3 text-primary-mint" style="font-size:1.8rem;"></i>
+                <span class="status-badge status-ongoing">Ongoing</span>
+              </div>
+              <h5 class="card-title">NoC Interconnect Fabric</h5>
+              <p class="card-text flex-grow-1">
+                Designing a configurable Network-on-Chip interconnect fabric for a multi-core ASIC.
+                Full UVM verification with traffic-model stimulus and latency/throughput analysis.
+              </p>
+              <div class="mt-auto pt-2">
+                <span class="tag-badge tag-primary">ASIC</span>
+                <span class="tag-badge tag-primary">NoC</span>
+                <span class="tag-badge tag-primary">UVM</span>
+                <span class="tag-badge tag-secondary">SystemVerilog</span>
+                <span class="tag-badge tag-secondary">Xcelium</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /row -->
+
+      <!-- CTA -->
+      <div class="text-center mt-5 pt-3 reveal">
+        <p class="text-muted-mint mb-3">Interested in working with us?</p>
+        <a href="contact.html" class="btn btn-primary me-2">
+          <i class="bi bi-envelope-fill me-2"></i>Get in Touch
+        </a>
+        <a href="services.html" class="btn btn-outline-light">
+          <i class="bi bi-grid-fill me-2"></i>Our Services
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <img src="assets/images/logo.png" alt="Mintaka LLC" class="footer-logo" />
+      <p class="mb-2">
+        <a href="https://www.mintaka-ai.com" target="_blank" rel="noopener" class="footer-main-link">
+          <i class="bi bi-globe2 me-2"></i>www.mintaka-ai.com
+        </a>
+      </p>
+      <p class="mb-1">&copy; <span id="year"></span> Mintaka LLC. All rights reserved.</p>
+      <p class="mb-0">
+        <a href="https://www.linkedin.com/company/mintaka-ai" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <i class="bi bi-linkedin me-1"></i>LinkedIn
+        </a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
