@@ -76,6 +76,12 @@
 
             <form id="contactForm" novalidate>
 
+              <!-- Honeypot: invisible to humans, bots will fill it -->
+              <div class="hp-field" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;overflow:hidden;">
+                <label for="website">Website</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+              </div>
+
               <!-- Name -->
               <div class="mb-4">
                 <label for="name" class="form-label">Your Name</label>
@@ -120,7 +126,24 @@
                 <div class="invalid-feedback">Please enter your message.</div>
               </div>
 
-              <button type="submit" class="btn btn-primary w-100">
+              <!-- Math CAPTCHA -->
+              <div class="mb-4">
+                <label for="captcha" class="form-label">
+                  <i class="bi bi-shield-check me-1"></i>Security Check: What is <span id="captchaNum1"></span> + <span id="captchaNum2"></span>?
+                </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="captcha"
+                  name="captcha"
+                  placeholder="Enter the sum"
+                  autocomplete="off"
+                  required
+                />
+                <div class="invalid-feedback">Incorrect answer. Please try again.</div>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100" id="submitBtn">
                 <i class="bi bi-send-fill me-2"></i>Send Message
               </button>
 
@@ -136,8 +159,9 @@
               <div class="card-body">
                 <i class="bi bi-envelope-fill card-icon" style="font-size:1.6rem;"></i>
                 <h6 class="card-title">Email Us</h6>
-                <a href="mailto:info@mintaka-ai.com" class="contact-email">
-                  info@mintaka-ai.com
+                <a id="contactEmailLink" href="#" class="contact-email">
+                  <!-- Rendered by JS to prevent bot scraping -->
+                  <span id="contactEmailText"></span>
                 </a>
                 <p class="card-text mt-2">We typically respond within one business day.</p>
               </div>

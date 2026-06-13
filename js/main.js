@@ -41,12 +41,43 @@
   targets.forEach((el) => observer.observe(el));
 })();
 
+/* ---------- Email obfuscation (anti-scraping) ---------- */
+(function () {
+  const emailLink = document.getElementById('contactEmailLink');
+  const emailText = document.getElementById('contactEmailText');
+  if (!emailLink || !emailText) return;
+
+  // Build email from parts so it's not in the HTML source
+  const parts = ['info', '@', 'mintaka', '-', 'ai', '.', 'com'];
+  const email = parts.join('');
+  emailLink.href = 'mail' + 'to:' + email;
+  emailText.textContent = email;
+})();
+
 /* ---------- Contact form validation ---------- */
 (function () {
   const form = document.getElementById('contactForm');
   if (!form) return;
 
   const successAlert = document.getElementById('formSuccess');
+  const submitBtn = document.getElementById('submitBtn');
+
+  // Rate limiting: prevent resubmission within 30 seconds
+  let lastSubmitTime = 0;
+  const COOLDOWN_MS = 30000;
+
+  // Generate CAPTCHA numbers
+  let captchaAnswer = 0;
+  function generateCaptcha() {
+    const num1 = Math.floor(Math.random() * 10) + 1;
+    const num2 = Math.floor(Math.random() * 10) + 1;
+    captchaAnswer = num1 + num2;
+    document.getElementById('captchaNum1').textContent = num1;
+    document.getElementById('captchaNum2').textContent = num2;
+    const captchaInput = form.querySelector('#captcha');
+    if (captchaInput) captchaInput.value = '';
+  }
+  generateCaptcha();
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -58,6 +89,21 @@
     });
 
     let valid = true;
+
+    // Honeypot check: if filled, silently reject (bot detected)
+    const honeypot = form.querySelector('#website');
+    if (honeypot && honeypot.value.trim() !== '') {
+      // Silently reject — bot detected
+      return;
+    }
+
+    // Rate limiting check
+    const now = Date.now();
+    if (now - lastSubmitTime < COOLDOWN_MS) {
+      const remainingSec = Math.ceil((COOLDOWN_MS - (now - lastSubmitTime)) / 1000);
+      alert('Please wait ' + remainingSec + ' seconds before submitting again.');
+      return;
+    }
 
     // Name
     const name = form.querySelector('#name');
@@ -81,14 +127,39 @@
       valid = false;
     }
 
+    // CAPTCHA validation
+    const captchaInput = form.querySelector('#captcha');
+    const captchaValue = parseInt(captchaInput.value, 10);
+    if (isNaN(captchaValue) || captchaValue !== captchaAnswer) {
+      captchaInput.classList.add('is-invalid');
+      valid = false;
+      generateCaptcha(); // Generate new numbers on failure
+    }
+
     if (valid) {
+      // Record submission time for rate limiting
+      lastSubmitTime = Date.now();
+
+      // Disable button temporarily
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>Sent!';
+
       // Show success alert
       if (successAlert) {
         successAlert.classList.remove('d-none');
         successAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
+
+      // Reset form and generate new CAPTCHA
       form.reset();
       form.classList.remove('was-validated');
+      generateCaptcha();
+
+      // Re-enable button after cooldown
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="bi bi-send-fill me-2"></i>Send Message';
+      }, COOLDOWN_MS);
     }
   });
 })();

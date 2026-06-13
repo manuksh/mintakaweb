@@ -58,150 +58,61 @@
       <div class="section-header reveal">
         <h2>Projects</h2>
         <div class="section-divider"></div>
-        <p>A selection of our FPGA and ASIC design and verification engagements.</p>
+        <p>Our current FPGA and verification platform projects.</p>
       </div>
 
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div class="row row-cols-1 row-cols-md-2 g-4">
 
-        <!-- Project 1 -->
+        <!-- Project 1: SDR_LIB -->
         <div class="col reveal">
           <div class="project-card">
             <div class="card-body d-flex flex-column">
               <div class="d-flex justify-content-between align-items-start mb-3">
-                <i class="bi bi-cpu text-primary-mint" style="font-size:1.8rem;"></i>
-                <span class="status-badge status-completed">Completed</span>
+                <i class="bi bi-broadcast text-primary-mint" style="font-size:1.8rem;"></i>
+                <span class="status-badge status-ongoing">Ongoing</span>
               </div>
-              <h5 class="card-title">PCIe Gen4 Controller IP</h5>
+              <h5 class="card-title">SDR_LIB</h5>
               <p class="card-text flex-grow-1">
-                Designed a high-throughput PCIe Gen4 x8 controller in SystemVerilog targeting Xilinx UltraScale+ FPGA.
-                Full UVM testbench with protocol-compliance checks and error-injection coverage.
+                A fully parameterized, reusable FPGA IP library for Software Defined Radio applications,
+                targeting Xilinx/AMD and Intel/Altera FPGAs (primary target: Zynq-7020). All RTL written in
+                SystemVerilog IEEE 1800-2017 with AXI4-Stream as the standard data transport interface.
+                Covers the complete SDR signal chain — from ADC/DAC interfaces through DDC/DUC, filtering,
+                synchronization, modulation/demodulation, FEC, and packet processing — plus supporting
+                infrastructure (CDC, memory, control plane, debug).
               </p>
               <div class="mt-auto pt-2">
+                <span class="tag-badge tag-primary">SDR</span>
                 <span class="tag-badge tag-primary">FPGA</span>
-                <span class="tag-badge tag-primary">PCIe Gen4</span>
-                <span class="tag-badge tag-primary">UVM</span>
-                <span class="tag-badge tag-secondary">SystemVerilog</span>
-                <span class="tag-badge tag-secondary">Vivado</span>
+                <span class="tag-badge tag-primary">SystemVerilog</span>
+                <span class="tag-badge tag-secondary">AXI4-Stream</span>
+                <span class="tag-badge tag-secondary">Zynq-7020</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Project 2 -->
+        <!-- Project 2: LiteXVerify -->
         <div class="col reveal">
           <div class="project-card">
             <div class="card-body d-flex flex-column">
               <div class="d-flex justify-content-between align-items-start mb-3">
-                <i class="bi bi-shield-lock text-primary-mint" style="font-size:1.8rem;"></i>
-                <span class="status-badge status-completed">Completed</span>
+                <i class="bi bi-clipboard-check text-primary-mint" style="font-size:1.8rem;"></i>
+                <span class="status-badge status-ongoing">Ongoing</span>
               </div>
-              <h5 class="card-title">AES-256 Crypto Accelerator</h5>
+              <h5 class="card-title">LiteXVerify</h5>
               <p class="card-text flex-grow-1">
-                RTL implementation of an AES-256 hardware accelerator for an ASIC security chip.
-                Synthesised with Synopsys Design Compiler; achieved timing closure at 500 MHz in TSMC 28nm.
+                Open-source, local-first verification infrastructure for LiteX-based SoC designs.
+                Provides a reproducible workflow for RTL generation, UVM/cocotb testbench creation,
+                simulation, and coverage analysis — all running locally with no cloud dependency.
+                Implements the Model Context Protocol (MCP) for AI-assisted verification workflows.
               </p>
               <div class="mt-auto pt-2">
-                <span class="tag-badge tag-primary">ASIC</span>
-                <span class="tag-badge tag-primary">AES-256</span>
-                <span class="tag-badge tag-primary">28nm</span>
-                <span class="tag-badge tag-secondary">VHDL</span>
-                <span class="tag-badge tag-secondary">Design Compiler</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="col reveal">
-          <div class="project-card">
-            <div class="card-body d-flex flex-column">
-              <div class="d-flex justify-content-between align-items-start mb-3">
-                <i class="bi bi-reception-4 text-primary-mint" style="font-size:1.8rem;"></i>
-                <span class="status-badge status-completed">Completed</span>
-              </div>
-              <h5 class="card-title">DDR5 Memory Controller</h5>
-              <p class="card-text flex-grow-1">
-                Full UVM verification environment for a DDR5 memory controller subsystem.
-                Developed comprehensive scoreboard, response checker, and coverage model — achieving 98% functional coverage.
-              </p>
-              <div class="mt-auto pt-2">
-                <span class="tag-badge tag-primary">DDR5</span>
-                <span class="tag-badge tag-primary">UVM</span>
+                <span class="tag-badge tag-primary">LiteX</span>
                 <span class="tag-badge tag-primary">Verification</span>
-                <span class="tag-badge tag-secondary">SystemVerilog</span>
-                <span class="tag-badge tag-secondary">VCS</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 4 -->
-        <div class="col reveal">
-          <div class="project-card">
-            <div class="card-body d-flex flex-column">
-              <div class="d-flex justify-content-between align-items-start mb-3">
-                <i class="bi bi-hdd-network text-primary-mint" style="font-size:1.8rem;"></i>
-                <span class="status-badge status-ongoing">Ongoing</span>
-              </div>
-              <h5 class="card-title">Ethernet MAC 100G IP</h5>
-              <p class="card-text flex-grow-1">
-                Developing a 100G Ethernet MAC IP core in SystemVerilog for Intel Stratix 10 FPGA.
-                Target: line-rate processing with full IEEE 802.3 compliance verification.
-              </p>
-              <div class="mt-auto pt-2">
-                <span class="tag-badge tag-primary">FPGA</span>
-                <span class="tag-badge tag-primary">100G Ethernet</span>
-                <span class="tag-badge tag-primary">Stratix 10</span>
-                <span class="tag-badge tag-secondary">SystemVerilog</span>
-                <span class="tag-badge tag-secondary">Quartus</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 5 -->
-        <div class="col reveal">
-          <div class="project-card">
-            <div class="card-body d-flex flex-column">
-              <div class="d-flex justify-content-between align-items-start mb-3">
-                <i class="bi bi-diagram-3 text-primary-mint" style="font-size:1.8rem;"></i>
-                <span class="status-badge status-completed">Completed</span>
-              </div>
-              <h5 class="card-title">RISC-V Core FPGA Prototype</h5>
-              <p class="card-text flex-grow-1">
-                FPGA prototype of a custom 32-bit RISC-V core on Xilinx Zynq-7000 SoC.
-                Included AXI4 interconnect integration, bare-metal BSP, and in-system JTAG debug.
-              </p>
-              <div class="mt-auto pt-2">
-                <span class="tag-badge tag-primary">RISC-V</span>
-                <span class="tag-badge tag-primary">Zynq</span>
-                <span class="tag-badge tag-primary">FPGA Proto</span>
-                <span class="tag-badge tag-secondary">Verilog</span>
-                <span class="tag-badge tag-secondary">AXI4</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 6 -->
-        <div class="col reveal">
-          <div class="project-card">
-            <div class="card-body d-flex flex-column">
-              <div class="d-flex justify-content-between align-items-start mb-3">
-                <i class="bi bi-grid-3x3 text-primary-mint" style="font-size:1.8rem;"></i>
-                <span class="status-badge status-ongoing">Ongoing</span>
-              </div>
-              <h5 class="card-title">NoC Interconnect Fabric</h5>
-              <p class="card-text flex-grow-1">
-                Designing a configurable Network-on-Chip interconnect fabric for a multi-core ASIC.
-                Full UVM verification with traffic-model stimulus and latency/throughput analysis.
-              </p>
-              <div class="mt-auto pt-2">
-                <span class="tag-badge tag-primary">ASIC</span>
-                <span class="tag-badge tag-primary">NoC</span>
                 <span class="tag-badge tag-primary">UVM</span>
-                <span class="tag-badge tag-secondary">SystemVerilog</span>
-                <span class="tag-badge tag-secondary">Xcelium</span>
+                <span class="tag-badge tag-secondary">cocotb</span>
+                <span class="tag-badge tag-secondary">Python</span>
+                <span class="tag-badge tag-secondary">MCP</span>
               </div>
             </div>
           </div>
