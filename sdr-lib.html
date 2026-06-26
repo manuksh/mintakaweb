@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="assets/images/icon2.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SDR_LIB — A fully parameterized FPGA IP library for Software Defined Radio applications. SystemVerilog IEEE 1800-2017, AXI4-Stream, targeting Zynq-7020." />
+  <title>SDR_LIB — FPGA SDR IP Library | Mintaka LLC</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <!-- Custom styles -->
+  <link href="css/style.css" rel="stylesheet" />
+
+  <style>
+    .project-hero {
+      padding: 8rem 0 3rem;
+      background: linear-gradient(180deg, rgba(0,180,255,0.03) 0%, transparent 100%);
+    }
+    .project-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+    }
+    .project-hero .lead {
+      color: var(--mint-text-muted);
+      font-size: 1.1rem;
+      max-width: 700px;
+    }
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .project-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .project-meta-item i {
+      color: var(--mint-primary);
+    }
+    .project-meta-item span {
+      font-size: 0.85rem;
+      color: var(--mint-text-muted);
+    }
+
+    /* Architecture diagram */
+    .arch-diagram {
+      background: var(--mint-bg-card);
+      border: 1px solid var(--mint-border);
+      border-radius: 8px;
+      padding: 2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      line-height: 1.6;
+      color: var(--mint-text);
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .arch-diagram .signal-flow {
+      color: var(--mint-primary);
+    }
+    .arch-diagram .component {
+      color: var(--mint-accent);
+    }
+
+    /* Module grid */
+    .module-card {
+      background: var(--mint-bg-card);
+      border: 1px solid var(--mint-border);
+      border-radius: 6px;
+      padding: 1.25rem;
+      height: 100%;
+      transition: all var(--transition);
+    }
+    .module-card:hover {
+      border-color: var(--mint-primary);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 20px var(--mint-primary-glow);
+    }
+    .module-card i {
+      font-size: 1.5rem;
+      color: var(--mint-primary);
+      margin-bottom: 0.75rem;
+    }
+    .module-card h6 {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .module-card p {
+      font-size: 0.8rem;
+      color: var(--mint-text-muted);
+      margin-bottom: 0;
+    }
+
+    /* Roadmap timeline */
+    .roadmap-stage {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 2rem;
+    }
+    .roadmap-stage::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--mint-primary);
+      box-shadow: 0 0 10px var(--mint-primary-glow);
+    }
+    .roadmap-stage::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 1.5rem;
+      width: 2px;
+      height: calc(100% + 0.5rem);
+      background: var(--mint-border);
+    }
+    .roadmap-stage:last-child::after {
+      display: none;
+    }
+    .roadmap-stage h5 {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      color: var(--mint-primary);
+      margin-bottom: 0.5rem;
+    }
+    .roadmap-stage p {
+      font-size: 0.88rem;
+      color: var(--mint-text-muted);
+      margin-bottom: 0.75rem;
+    }
+    .roadmap-modules {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .roadmap-module {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      background: rgba(0,180,255,0.1);
+      border: 1px solid rgba(0,180,255,0.2);
+      color: var(--mint-primary);
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+    }
+
+    /* Code block */
+    .code-block {
+      background: #050810;
+      border: 1px solid var(--mint-border);
+      border-radius: 6px;
+      padding: 1.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.7;
+      color: var(--mint-text);
+      overflow-x: auto;
+    }
+    .code-block .comment {
+      color: var(--mint-text-muted);
+    }
+    .code-block .keyword {
+      color: var(--mint-primary);
+    }
+
+    /* Specs table */
+    .specs-table {
+      background: var(--mint-bg-card);
+      border: 1px solid var(--mint-border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .specs-table table {
+      margin-bottom: 0;
+    }
+    .specs-table th {
+      background: rgba(0,180,255,0.05);
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mint-primary);
+      padding: 1rem;
+      border-color: var(--mint-border);
+    }
+    .specs-table td {
+      padding: 0.85rem 1rem;
+      font-size: 0.88rem;
+      color: var(--mint-text);
+      border-color: var(--mint-border);
+    }
+    .specs-table code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      background: rgba(0,180,255,0.1);
+      color: var(--mint-primary);
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar navbar-expand-lg fixed-top" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand" href="index.html" aria-label="Mintaka LLC home">
+        <img src="assets/images/logo.png" alt="Mintaka LLC logo" class="logo-invert" />
+      </a>
+
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#mainNav"
+              aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link active" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== PROJECT HERO ===== -->
+  <section class="project-hero">
+    <div class="container">
+      <a href="projects.html" class="d-inline-flex align-items-center gap-2 mb-4" style="color:var(--mint-text-muted);font-size:0.85rem;">
+        <i class="bi bi-arrow-left"></i> Back to Projects
+      </a>
+
+      <div class="row align-items-start">
+        <div class="col-lg-8">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <i class="bi bi-broadcast text-primary-mint" style="font-size:2.5rem;"></i>
+            <span class="status-badge status-ongoing">Ongoing Development</span>
+          </div>
+
+          <h1>FPGA SDR IP Library</h1>
+          <p class="lead">
+            A comprehensive, fully parameterized FPGA IP library for Software Defined Radio applications.
+            Designed for maximum reusability and composability across Xilinx/AMD and Intel/Altera FPGA platforms.
+          </p>
+
+          <div class="project-meta">
+            <div class="project-meta-item">
+              <i class="bi bi-filetype-raw"></i>
+              <span>SystemVerilog IEEE 1800-2017</span>
+            </div>
+            <div class="project-meta-item">
+              <i class="bi bi-cpu"></i>
+              <span>Primary Target: Zynq-7020</span>
+            </div>
+            <div class="project-meta-item">
+              <i class="bi bi-arrow-left-right"></i>
+              <span>AXI4-Stream Interface</span>
+            </div>
+            <div class="project-meta-item">
+              <i class="bi bi-grid-3x3"></i>
+              <span>150+ RTL Modules</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mt-4 mt-lg-0">
+          <div class="mint-card">
+            <div class="card-body">
+              <h6 style="font-family:var(--font-heading);font-size:0.75rem;letter-spacing:0.05em;color:var(--mint-primary);margin-bottom:1rem;">TECHNOLOGY STACK</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="tag-badge tag-primary">SDR</span>
+                <span class="tag-badge tag-primary">FPGA</span>
+                <span class="tag-badge tag-primary">SystemVerilog</span>
+                <span class="tag-badge tag-secondary">AXI4-Stream</span>
+                <span class="tag-badge tag-secondary">Zynq-7020</span>
+                <span class="tag-badge tag-secondary">Vivado</span>
+                <span class="tag-badge tag-secondary">Quartus</span>
+                <span class="tag-badge tag-secondary">cocotb</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECT OVERVIEW ===== -->
+  <section class="py-5">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Project Overview</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="row justify-content-center reveal">
+        <div class="col-lg-10">
+          <div class="mint-card">
+            <div class="card-body">
+              <p>
+                <strong class="text-white">SDR_LIB</strong> is an in-house FPGA IP library under active development at Mintaka LLC,
+                engineered to provide a complete, production-ready foundation for Software Defined Radio systems.
+                The library covers the entire SDR signal chain — from high-speed ADC/DAC interfaces through digital
+                down/up conversion, filtering, synchronization, modulation/demodulation, forward error correction,
+                and packet processing.
+              </p>
+              <p>
+                Every module is written in <strong class="text-white">SystemVerilog IEEE 1800-2017</strong> and uses
+                <strong class="text-white">AXI4-Stream</strong> as the standard data transport interface, enabling
+                seamless composition without glue logic. The library is fully parameterized, supporting various
+                data widths, decimation/interpolation rates, and filter configurations through compile-time parameters.
+              </p>
+              <p class="mb-0">
+                The primary target platform is the <strong class="text-white">Xilinx Zynq-7020</strong>, with the
+                real-time DSP running in the PL (FPGA fabric) while the PS (ARM Cortex-A9 + FreeRTOS) handles
+                register control, AGC setpoints, packet routing, and higher-layer protocols via AXI-Lite
+                and AXI-Stream DMA interfaces.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ARCHITECTURE ===== -->
+  <section class="py-5" style="background:rgba(0,180,255,0.02);">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>System Architecture</h2>
+        <div class="section-divider"></div>
+        <p>Complete SDR signal chain from ADC to host and back</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-6 reveal">
+          <h5 style="font-family:var(--font-heading);font-size:0.85rem;letter-spacing:0.05em;color:var(--mint-primary);margin-bottom:1rem;">
+            <i class="bi bi-arrow-down-right me-2"></i>RECEIVER CHAIN (RX)
+          </h5>
+          <div class="arch-diagram"><span class="component">ADC IQ Input</span>
+  └─► <span class="signal-flow">DDC Core</span> ──► <span class="signal-flow">AGC</span> ──► <span class="signal-flow">Carrier Recovery</span> ──► <span class="signal-flow">Timing Recovery</span> ──► <span class="signal-flow">Packet Detector</span> ──► <span class="component">Host (PS/MCU)</span>
+       │                         │                     │
+    <span class="component">[NCO/DDS]</span>              <span class="component">[Costas Loop]</span>        <span class="component">[Gardner TED]</span>
+    <span class="component">[CIC Decim]</span>
+    <span class="component">[FIR Comp]</span></div>
+        </div>
+
+        <div class="col-lg-6 reveal">
+          <h5 style="font-family:var(--font-heading);font-size:0.85rem;letter-spacing:0.05em;color:var(--mint-primary);margin-bottom:1rem;">
+            <i class="bi bi-arrow-up-right me-2"></i>TRANSMITTER CHAIN (TX)
+          </h5>
+          <div class="arch-diagram"><span class="component">Host (PS/MCU)</span> ──► <span class="signal-flow">Packet Framer</span> ──► <span class="signal-flow">Modulator</span> ──► <span class="signal-flow">DUC Core</span> ──► <span class="component">DAC IQ Output</span>
+                                                         │
+                                                    <span class="component">[CIC Interp]</span>
+                                                    <span class="component">[FIR Interp]</span>
+                                                    <span class="component">[NCO/DDS]</span></div>
+        </div>
+      </div>
+
+      <div class="row mt-4 reveal">
+        <div class="col-12">
+          <h5 style="font-family:var(--font-heading);font-size:0.85rem;letter-spacing:0.05em;color:var(--mint-primary);margin-bottom:1rem;">
+            <i class="bi bi-cpu me-2"></i>ZYNQ-7020 PARTITION
+          </h5>
+          <div class="specs-table">
+            <table class="table table-dark mb-0">
+              <thead>
+                <tr>
+                  <th style="width:25%;">Domain</th>
+                  <th>Responsibility</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>PL (FPGA)</code></td>
+                  <td>Real-time DSP at ADC/DAC sample rate — this IP library</td>
+                </tr>
+                <tr>
+                  <td><code>PS (ARM)</code></td>
+                  <td>Register control, AGC setpoints, packet routing, higher-layer protocols (FreeRTOS)</td>
+                </tr>
+                <tr>
+                  <td><code>AXI-Lite</code></td>
+                  <td>PS writes frequency tuning word, gain, decimation rate to PL registers</td>
+                </tr>
+                <tr>
+                  <td><code>AXI-Stream DMA</code></td>
+                  <td>IQ data transfer between PL and PS DDR</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MODULE GROUPS ===== -->
+  <section class="py-5">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Module Groups</h2>
+        <div class="section-divider"></div>
+        <p>22 functional categories covering the complete SDR IP stack</p>
+      </div>
+
+      <div class="row g-3">
+        <!-- Row 1: Foundation -->
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-box-seam"></i>
+            <h6>Packages</h6>
+            <p>Shared types, parameters, AXI-Stream interface definitions</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-calculator"></i>
+            <h6>Fixed-Point</h6>
+            <p>Resize, round, saturate, clip detect, gain, shift operations</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-plus-slash-minus"></i>
+            <h6>Complex Math</h6>
+            <p>Add, multiply, conjugate, abs², scale, rotate, mix</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-activity"></i>
+            <h6>NCO / DDS</h6>
+            <p>Phase accumulator, LUT and CORDIC-based DDS, complex NCO</p>
+          </div>
+        </div>
+
+        <!-- Row 2: DSP Core -->
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-bezier2"></i>
+            <h6>CORDIC</h6>
+            <p>sin/cos, atan2, vectoring, rotation, polar↔cartesian</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-soundwave"></i>
+            <h6>Filters</h6>
+            <p>FIR, CIC, halfband, polyphase, boxcar — decimate & interpolate</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-arrow-down-circle"></i>
+            <h6>DDC</h6>
+            <p>Digital Down Converter: mixer → CIC → FIR → baseband IQ</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-arrow-up-circle"></i>
+            <h6>DUC</h6>
+            <p>Digital Up Converter: baseband IQ → FIR → CIC → mixer</p>
+          </div>
+        </div>
+
+        <!-- Row 3: Synchronization -->
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-speedometer2"></i>
+            <h6>Sync / AGC</h6>
+            <p>Power estimator, RSSI, AGC loop, gain apply, saturator</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-bullseye"></i>
+            <h6>Sync / Carrier</h6>
+            <p>Costas loop, complex PLL, freq/phase error estimators</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-clock-history"></i>
+            <h6>Sync / Timing</h6>
+            <p>Gardner TED, Mueller-Müller, symbol timing, fractional delay</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-flag"></i>
+            <h6>Sync / Frame</h6>
+            <p>Preamble correlator, sync word detector, frame aligner</p>
+          </div>
+        </div>
+
+        <!-- Row 4: Modulation -->
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-broadcast-pin"></i>
+            <h6>Modulation</h6>
+            <p>BPSK, QPSK, OQPSK, OOK, FSK, GFSK, GMSK, QAM16, QAM64</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-reception-4"></i>
+            <h6>Demodulation</h6>
+            <p>All demods + LLR/soft-decision output for FEC</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-bar-chart-steps"></i>
+            <h6>FFT</h6>
+            <p>Radix-2, streaming FFT/IFFT, windowing, spectrum analysis</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-grid-3x3-gap"></i>
+            <h6>Channelizer</h6>
+            <p>Polyphase filter bank, FFT channelizer, channel select</p>
+          </div>
+        </div>
+
+        <!-- Row 5: Advanced -->
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-layers"></i>
+            <h6>OFDM</h6>
+            <p>CP insert/remove, FFT RX/TX, pilots, channel estimation</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-shield-check"></i>
+            <h6>FEC</h6>
+            <p>CRC, scrambler, conv/Viterbi, Reed-Solomon, LDPC, Polar</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-envelope"></i>
+            <h6>Packet</h6>
+            <p>Framer, deframer, header parser, CRC, stream packetizer</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-arrow-left-right"></i>
+            <h6>Stream</h6>
+            <p>FIFO, register slice, width converter, mux, demux</p>
+          </div>
+        </div>
+
+        <!-- Row 6: Infrastructure -->
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-arrow-repeat"></i>
+            <h6>CDC</h6>
+            <p>Async FIFO, pulse/level/bus sync, reset synchronizer</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-memory"></i>
+            <h6>Memory</h6>
+            <p>Single/dual/true-dual-port RAM, ROM, delay line, buffers</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-plug"></i>
+            <h6>Interfaces</h6>
+            <p>ADC/DAC capture, IQ formatter, JESD204, LVDS, SPI RF</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-sliders"></i>
+            <h6>Control</h6>
+            <p>Register bank, AXI-Lite/Wishbone slave, SPI/UART/I2C</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 reveal">
+          <div class="module-card">
+            <i class="bi bi-bug"></i>
+            <h6>Debug</h6>
+            <p>ILA wrapper, stream monitor, overflow/underflow, IQ capture</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DEVELOPMENT ROADMAP ===== -->
+  <section class="py-5" style="background:rgba(0,180,255,0.02);">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Development Roadmap</h2>
+        <div class="section-divider"></div>
+        <p>Phased approach from foundation to advanced DSP</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="reveal">
+            <div class="roadmap-stage">
+              <h5>Stage 1 — Foundation</h5>
+              <p>Core building blocks and infrastructure primitives</p>
+              <div class="roadmap-modules">
+                <span class="roadmap-module">fxp_resize</span>
+                <span class="roadmap-module">fxp_saturate</span>
+                <span class="roadmap-module">complex_add</span>
+                <span class="roadmap-module">complex_mult</span>
+                <span class="roadmap-module">complex_abs2</span>
+                <span class="roadmap-module">stream_fifo</span>
+                <span class="roadmap-module">async_fifo</span>
+                <span class="roadmap-module">nco_dds</span>
+                <span class="roadmap-module">fir_direct</span>
+                <span class="roadmap-module">cic_decimator</span>
+                <span class="roadmap-module">cic_interpolator</span>
+              </div>
+            </div>
+
+            <div class="roadmap-stage">
+              <h5>Stage 2 — SDR Receiver Chain</h5>
+              <p>Complete receive path from ADC to decoded packets</p>
+              <div class="roadmap-modules">
+                <span class="roadmap-module">ddc_core</span>
+                <span class="roadmap-module">power_estimator</span>
+                <span class="roadmap-module">agc_loop</span>
+                <span class="roadmap-module">preamble_correlator</span>
+                <span class="roadmap-module">packet_detector</span>
+                <span class="roadmap-module">crc_checker</span>
+                <span class="roadmap-module">bpsk_demod</span>
+                <span class="roadmap-module">qpsk_demod</span>
+              </div>
+            </div>
+
+            <div class="roadmap-stage">
+              <h5>Stage 3 — SDR Transmitter Chain</h5>
+              <p>Complete transmit path from packets to DAC</p>
+              <div class="roadmap-modules">
+                <span class="roadmap-module">duc_core</span>
+                <span class="roadmap-module">bpsk_mod</span>
+                <span class="roadmap-module">qpsk_mod</span>
+                <span class="roadmap-module">interpolation_fir</span>
+                <span class="roadmap-module">packet_framer</span>
+                <span class="roadmap-module">scrambler</span>
+                <span class="roadmap-module">dac_sample_output</span>
+              </div>
+            </div>
+
+            <div class="roadmap-stage">
+              <h5>Stage 4 — Advanced DSP</h5>
+              <p>Synchronization loops, spectrum processing, and advanced modulation</p>
+              <div class="roadmap-modules">
+                <span class="roadmap-module">costas_loop</span>
+                <span class="roadmap-module">gardner_timing_recovery</span>
+                <span class="roadmap-module">fft_streaming</span>
+                <span class="roadmap-module">polyphase_channelizer</span>
+                <span class="roadmap-module">ofdm_rx</span>
+                <span class="roadmap-module">ofdm_tx</span>
+                <span class="roadmap-module">viterbi_decoder</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CODING STANDARDS ===== -->
+  <section class="py-5">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Coding Standards</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-6 reveal">
+          <div class="specs-table">
+            <table class="table table-dark mb-0">
+              <thead>
+                <tr>
+                  <th>Aspect</th>
+                  <th>Standard</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Language</td>
+                  <td>SystemVerilog IEEE 1800-2017</td>
+                </tr>
+                <tr>
+                  <td>Organization</td>
+                  <td>One module per file, filename = module name</td>
+                </tr>
+                <tr>
+                  <td>Parameters</td>
+                  <td><code>kCamelCase</code> prefix (e.g., <code>kDataWidth</code>)</td>
+                </tr>
+                <tr>
+                  <td>Ports</td>
+                  <td><code>snake_case</code>; AXI-Stream slave = <code>s_*</code>, master = <code>m_*</code></td>
+                </tr>
+                <tr>
+                  <td>Reset</td>
+                  <td>Active-low asynchronous (<code>rst_n</code>), synchronous release</td>
+                </tr>
+                <tr>
+                  <td>Types</td>
+                  <td>Imported from <code>sdr_types_pkg</code>; use <code>logic</code> not <code>wire</code>/<code>reg</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal">
+          <h5 style="font-family:var(--font-heading);font-size:0.85rem;letter-spacing:0.05em;color:var(--mint-primary);margin-bottom:1rem;">
+            <i class="bi bi-file-earmark-code me-2"></i>PACKAGE IMPORT
+          </h5>
+          <div class="code-block mb-4"><span class="comment">// In any RTL module, import shared types with:</span>
+<span class="keyword">import</span> sdr_types_pkg::*;
+<span class="keyword">import</span> sdr_params_pkg::*;</div>
+
+          <h5 style="font-family:var(--font-heading);font-size:0.85rem;letter-spacing:0.05em;color:var(--mint-primary);margin-bottom:1rem;">
+            <i class="bi bi-terminal me-2"></i>FILELIST USAGE
+          </h5>
+          <div class="code-block"><span class="comment"># Vivado TCL</span>
+read_sv -filelist [file normalize sdr_lib.f]
+
+<span class="comment"># ModelSim / Questa</span>
+vlog -sv -f sdr_lib.f
+
+<span class="comment"># VCS</span>
+vcs -sv -f sdr_lib.f
+
+<span class="comment"># Icarus Verilog</span>
+iverilog -f sdr_lib.f</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- ===== CTA ===== -->
+  <section class="py-5">
+    <div class="container">
+      <div class="text-center reveal">
+        <h2 style="font-family:var(--font-heading);font-size:clamp(1.4rem,3vw,2rem);margin-bottom:1rem;">
+          Interested in this project?
+        </h2>
+        <p class="text-muted-mint mb-4">
+          Learn more about our SDR capabilities and how we can help with your FPGA design.
+        </p>
+        <a href="contact.html" class="btn btn-primary me-2">
+          <i class="bi bi-envelope-fill me-2"></i>Get in Touch
+        </a>
+        <a href="projects.html" class="btn btn-ghost">
+          <i class="bi bi-arrow-left me-2"></i>All Projects
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <img src="assets/images/logo.png" alt="Mintaka LLC" class="footer-logo" />
+      <p class="mb-2">
+        <a href="https://www.mintaka-ai.com" target="_blank" rel="noopener" class="footer-main-link">
+          <i class="bi bi-globe2 me-2"></i>www.mintaka-ai.com
+        </a>
+      </p>
+      <p class="mb-1">&copy; <span id="year"></span> Mintaka LLC. All rights reserved.</p>
+      <p class="mb-0">
+        <a href="https://www.linkedin.com/company/mintaka-ai" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <i class="bi bi-linkedin me-1"></i>LinkedIn
+        </a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

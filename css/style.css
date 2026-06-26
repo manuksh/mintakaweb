@@ -621,3 +621,108 @@ section { position: relative; z-index: 1; }
   .contact-form-wrapper { padding: 1.5rem; }
   .mint-card .card-body { padding: 1.5rem; }
 }
+
+/* ========== Articles Styles ========== */
+.articles-section {
+  padding: 6rem 0 4rem;
+  background: linear-gradient(180deg, var(--mint-bg-dark) 0%, var(--mint-bg) 100%);
+  min-height: 100vh;
+}
+.articles-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.articles-title {
+  font-family: var(--font-orbitron);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--mint-text);
+  margin-bottom: 1rem;
+}
+.articles-subtitle {
+  font-size: 1.1rem;
+  color: var(--mint-text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.article-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--mint-border);
+  border-radius: 12px;
+  padding: 2rem;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+.article-card:hover {
+  border-color: var(--mint-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 198, 166, 0.15);
+}
+.article-card-icon {
+  font-size: 2rem;
+  color: var(--mint-accent);
+  margin-bottom: 1rem;
+}
+.article-card-title {
+  font-family: var(--font-orbitron);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--mint-text);
+  margin-bottom: 0.75rem;
+}
+.article-card-excerpt {
+  color: var(--mint-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+.article-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--mint-border);
+  font-size: 0.85rem;
+  color: var(--mint-text-muted);
+}
+.article-card-link {
+  color: var(--mint-accent);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: gap 0.2s ease;
+}
+.article-card-link:hover {
+  gap: 0.75rem;
+}
+.tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.article-preview-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--mint-border);
+  border-radius: 12px;
+  padding: 2.5rem;
+}
+.article-preview-title {
+  font-family: var(--font-orbitron);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--mint-text);
+  margin-bottom: 0.5rem;
+}
+.article-preview-subtitle {
+  font-size: 1rem;
+  color: var(--mint-text-muted);
+  line-height: 1.6;
+}
+.article-preview-excerpt {
+  color: var(--mint-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
