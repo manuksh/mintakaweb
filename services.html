@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="assets/images/icon2.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Mintaka LLC — FPGA & ASIC services: RTL Design, UVM Verification, FPGA Prototyping, Synthesis & Timing Closure." />
-  <title>Services — Mintaka LLC</title>
+  <meta name="description" content="Mintaka LLC services: FPGA, SoC, SDR design, embedded software, UVM/SystemVerilog verification, and hardware bring-up." />
+  <title>Services - Mintaka LLC</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,8 +23,11 @@
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar navbar-expand-lg fixed-top" aria-label="Main navigation">
     <div class="container">
-      <a class="navbar-brand" href="index.html" aria-label="Mintaka LLC home">
-        <img src="assets/images/logo.png" alt="Mintaka LLC logo" class="logo-invert" />
+      <a class="navbar-brand brand-lockup" href="index.html" aria-label="Mintaka LLC home">
+        <span class="brand-copy">
+          <span class="brand-name">Mintaka</span>
+          <span class="brand-line">FPGA | Design | Verification</span>
+        </span>
       </a>
 
       <button class="navbar-toggler" type="button"
@@ -38,6 +41,7 @@
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
           <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="articles.html">Articles</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
@@ -62,23 +66,23 @@
       <div class="section-header reveal">
         <h2>Our Services</h2>
         <div class="section-divider"></div>
-        <p>End-to-end FPGA and ASIC engineering — from architecture definition through verified, timing-closed implementation.</p>
+        <p>FPGA, SoC, SDR design, embedded software, and verification engineering from architecture through simulation, implementation, and hardware bring-up.</p>
       </div>
 
       <!-- SERVICE CARDS -->
       <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
 
-        <!-- RTL Design -->
+        <!-- FPGA Design -->
         <div class="col reveal">
           <div class="mint-card">
             <div class="card-body">
               <i class="bi bi-cpu-fill card-icon"></i>
-              <h5 class="card-title">RTL Design</h5>
+              <h5 class="card-title">FPGA Design</h5>
               <h6 class="text-primary-mint mb-3" style="font-family:var(--font-heading);font-size:.75rem;letter-spacing:.08em;">VHDL / Verilog / SystemVerilog</h6>
               <p class="card-text">
-                We design robust, reusable digital logic at the register-transfer level. Our engineers follow
-                industry coding guidelines to produce clean, synthesisable RTL that integrates seamlessly into
-                larger SoC or FPGA projects.
+                We design robust FPGA subsystems and reusable RTL IP for complex digital products.
+                Our engineers create synthesisable SystemVerilog/VHDL that integrates cleanly into
+                SoC, RF, telecom, and embedded platforms.
               </p>
               <ul class="list-unstyled mt-3" style="color:var(--mint-text-muted);font-size:.88rem;">
                 <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Block-level and subsystem design</li>
@@ -111,43 +115,64 @@
           </div>
         </div>
 
-        <!-- FPGA Prototyping -->
+        <!-- SDR Design -->
         <div class="col reveal">
           <div class="mint-card">
             <div class="card-body">
-              <i class="bi bi-grid-3x3-gap-fill card-icon"></i>
-              <h5 class="card-title">FPGA Prototyping</h5>
-              <h6 class="text-primary-mint mb-3" style="font-family:var(--font-heading);font-size:.75rem;letter-spacing:.08em;">Xilinx / AMD &amp; Intel / Altera</h6>
+              <i class="bi bi-broadcast card-icon"></i>
+              <h5 class="card-title">SDR Design</h5>
+              <h6 class="text-primary-mint mb-3" style="font-family:var(--font-heading);font-size:.75rem;letter-spacing:.08em;">RF / DSP / FPGA</h6>
               <p class="card-text">
-                We rapidly prototype digital designs on leading FPGA platforms, enabling early hardware validation
-                and software bring-up well before ASIC tape-out.
+                We build FPGA-based Software Defined Radio signal chains for digital communications,
+                spectrum processing, and embedded RF systems, from algorithm mapping to tested RTL.
               </p>
               <ul class="list-unstyled mt-3" style="color:var(--mint-text-muted);font-size:.88rem;">
-                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Vivado / Vitis &amp; Quartus Prime flows</li>
-                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Zynq &amp; SoC FPGA integration</li>
-                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>In-system debugging (ILA, SignalTap)</li>
-                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Multi-FPGA partition strategies</li>
+                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>DDC / DUC, NCO, CIC, FIR &amp; channelization</li>
+                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Synchronization, modulation &amp; demodulation</li>
+                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>AXI4-Stream SDR IP and data-path design</li>
+                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>MATLAB, GNU Radio and FPGA model alignment</li>
               </ul>
             </div>
           </div>
         </div>
 
-        <!-- Synthesis & Timing Closure -->
+        <!-- FPGA Implementation & Bring-Up -->
         <div class="col reveal">
           <div class="mint-card">
             <div class="card-body">
               <i class="bi bi-diagram-3-fill card-icon"></i>
-              <h5 class="card-title">Synthesis &amp; Timing Closure</h5>
-              <h6 class="text-primary-mint mb-3" style="font-family:var(--font-heading);font-size:.75rem;letter-spacing:.08em;">Synopsys / Cadence ASIC Flow</h6>
+              <h5 class="card-title">FPGA Implementation &amp; Bring-Up</h5>
+              <h6 class="text-primary-mint mb-3" style="font-family:var(--font-heading);font-size:.75rem;letter-spacing:.08em;">Vivado / Vitis / Quartus</h6>
               <p class="card-text">
-                We drive your design through the full physical implementation flow, achieving robust timing
-                closure across corners, modes, and operating conditions.
+                We take FPGA designs through synthesis, constraints, timing closure, board-level debug,
+                and software/hardware integration on AMD/Xilinx and Intel FPGA platforms.
               </p>
               <ul class="list-unstyled mt-3" style="color:var(--mint-text-muted);font-size:.88rem;">
-                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Logic synthesis (Design Compiler / Genus)</li>
-                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Place-and-route (Innovus / ICC2)</li>
-                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Static timing analysis &amp; sign-off</li>
-                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Area, power &amp; timing optimisation</li>
+                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Timing constraints, CDC review &amp; closure</li>
+                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Zynq &amp; SoC FPGA integration</li>
+                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>In-system debugging with ILA and SignalTap</li>
+                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Prototype validation and lab bring-up support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Embedded Software -->
+        <div class="col reveal">
+          <div class="mint-card">
+            <div class="card-body">
+              <i class="bi bi-terminal-fill card-icon"></i>
+              <h5 class="card-title">Embedded Software for Hardware Systems</h5>
+              <h6 class="text-primary-mint mb-3" style="font-family:var(--font-heading);font-size:.75rem;letter-spacing:.08em;">Bare-metal / FreeRTOS / Linux</h6>
+              <p class="card-text">
+                We develop embedded software that connects FPGA and SoC hardware to real products,
+                from low-level control and drivers through validation tools and SDR control planes.
+              </p>
+              <ul class="list-unstyled mt-3" style="color:var(--mint-text-muted);font-size:.88rem;">
+                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Register control, DMA tests &amp; board utilities</li>
+                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Bare-metal and FreeRTOS firmware</li>
+                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Linux userspace and driver-level integration</li>
+                <li><i class="bi bi-check-circle-fill me-2 text-primary-mint"></i>Hardware validation and production test tools</li>
               </ul>
             </div>
           </div>
@@ -160,7 +185,7 @@
         <div class="section-header">
           <h2>Tools &amp; Platforms</h2>
           <div class="section-divider"></div>
-          <p>We work with industry-standard EDA tools and FPGA/ASIC ecosystems.</p>
+          <p>We work with industry-standard FPGA, embedded software, verification, and SDR/DSP ecosystems.</p>
         </div>
       </div>
 
@@ -176,26 +201,11 @@
   </div>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="site-footer">
-    <div class="container">
-      <img src="assets/images/logo.png" alt="Mintaka LLC" class="footer-logo" />
-      <p class="mb-2">
-        <a href="https://www.mintaka-ai.com" target="_blank" rel="noopener" class="footer-main-link">
-          <i class="bi bi-globe2 me-2"></i>www.mintaka-ai.com
-        </a>
-      </p>
-      <p class="mb-1">&copy; <span id="year"></span> Mintaka LLC. All rights reserved.</p>
-      <p class="mb-0">
-        <a href="https://www.linkedin.com/company/mintaka-ai" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <i class="bi bi-linkedin me-1"></i>LinkedIn
-        </a>
-      </p>
-    </div>
-  </footer>
+  <footer class="site-footer"></footer>
 
   <!-- Bootstrap 5 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/layout.js"></script>
   <script src="js/main.js"></script>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

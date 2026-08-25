@@ -219,8 +219,11 @@
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar navbar-expand-lg fixed-top" aria-label="Main navigation">
     <div class="container">
-      <a class="navbar-brand" href="index.html" aria-label="Mintaka LLC home">
-        <img src="assets/images/logo.png" alt="Mintaka LLC logo" class="logo-invert" />
+      <a class="navbar-brand brand-lockup" href="index.html" aria-label="Mintaka LLC home">
+        <span class="brand-copy">
+          <span class="brand-name">Mintaka</span>
+          <span class="brand-line">FPGA | Design | Verification</span>
+        </span>
       </a>
 
       <button class="navbar-toggler" type="button"
@@ -234,6 +237,7 @@
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
           <li class="nav-item"><a class="nav-link active" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="articles.html">Articles</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
@@ -252,7 +256,7 @@
         <div class="col-lg-8">
           <div class="d-flex align-items-center gap-3 mb-3">
             <i class="bi bi-broadcast text-primary-mint" style="font-size:2.5rem;"></i>
-            <span class="status-badge status-ongoing">Ongoing Development</span>
+            <span class="status-badge status-completed">Done</span>
           </div>
 
           <h1>FPGA SDR IP Library</h1>
@@ -315,8 +319,8 @@
           <div class="mint-card">
             <div class="card-body">
               <p>
-                <strong class="text-white">SDR_LIB</strong> is an in-house FPGA IP library under active development at Mintaka LLC,
-                engineered to provide a complete, production-ready foundation for Software Defined Radio systems.
+                <strong class="text-white">SDR_LIB</strong> is a completed in-house FPGA IP library at Mintaka LLC,
+                engineered to provide a production-ready foundation for Software Defined Radio systems.
                 The library covers the entire SDR signal chain — from high-speed ADC/DAC interfaces through digital
                 down/up conversion, filtering, synchronization, modulation/demodulation, forward error correction,
                 and packet processing.
@@ -612,13 +616,13 @@
     </div>
   </section>
 
-  <!-- ===== DEVELOPMENT ROADMAP ===== -->
+  <!-- ===== COMPLETED DEVELOPMENT SCOPE ===== -->
   <section class="py-5" style="background:rgba(0,180,255,0.02);">
     <div class="container">
       <div class="section-header reveal">
-        <h2>Development Roadmap</h2>
+        <h2>Completed Development Scope</h2>
         <div class="section-divider"></div>
-        <p>Phased approach from foundation to advanced DSP</p>
+        <p>Implemented scope from foundation blocks to advanced DSP modules</p>
       </div>
 
       <div class="row justify-content-center">
@@ -788,26 +792,11 @@ iverilog -f sdr_lib.f</div>
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="site-footer">
-    <div class="container">
-      <img src="assets/images/logo.png" alt="Mintaka LLC" class="footer-logo" />
-      <p class="mb-2">
-        <a href="https://www.mintaka-ai.com" target="_blank" rel="noopener" class="footer-main-link">
-          <i class="bi bi-globe2 me-2"></i>www.mintaka-ai.com
-        </a>
-      </p>
-      <p class="mb-1">&copy; <span id="year"></span> Mintaka LLC. All rights reserved.</p>
-      <p class="mb-0">
-        <a href="https://www.linkedin.com/company/mintaka-ai" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <i class="bi bi-linkedin me-1"></i>LinkedIn
-        </a>
-      </p>
-    </div>
-  </footer>
+  <footer class="site-footer"></footer>
 
   <!-- Bootstrap 5 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/layout.js"></script>
   <script src="js/main.js"></script>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

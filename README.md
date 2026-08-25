@@ -1,6 +1,6 @@
-# Mintaka AI — Corporate Website
+# Mintaka LLC - Corporate Website
 
-Official website for **Mintaka AI** — an FPGA & ASIC design and verification company that deploys AI agents to help engineering teams verify faster, automate routine processes, and compress development cycles.
+Official website for **Mintaka LLC** - an engineering company focused on FPGA design, SDR design, and verification. **Mintaka-AI** is a separate branch developing AI-powered tools for engineering automation.
 
 🌐 **Live site:** [www.mintaka-ai.com](https://www.mintaka-ai.com)
 
@@ -16,9 +16,9 @@ This is a static multi-page website built with HTML5, CSS3, JavaScript, and Boot
 
 | Page | File | Description |
 |------|------|-------------|
-| Home | `index.html` | Hero, Why Mintaka, How It Works |
-| Services | `services.html` | RTL Design, Verification, FPGA Prototyping, Synthesis |
-| Projects | `projects.html` | Portfolio of FPGA/ASIC engagements |
+| Home | `index.html` | Hero, Why Mintaka, Latest Article |
+| Services | `services.html` | FPGA Design, SDR Design, Verification, Bring-Up |
+| Projects | `projects.html` | FPGA, SDR, and verification projects |
 | Contact | `contact.html` | Contact form + company info |
 
 ---
@@ -50,7 +50,7 @@ mintakaam/
 │   └── main.js         # Scroll-reveal, form validation, nav highlight
 └── assets/
     └── images/
-        ├── logo.png    # Mintaka AI logo
+        ├── logo.png    # Mintaka LLC logo
         └── banner.svg  # FPGA/waveform hero banner graphic
 ```
 
@@ -108,4 +108,4 @@ No server-side code. No environment variables.
 
 ---
 
-© 2026 Mintaka AI. All rights reserved.
+© 2026 Mintaka LLC. All rights reserved.

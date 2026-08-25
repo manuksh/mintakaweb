@@ -1,6 +1,6 @@
 <svg width="100%" viewBox="0 0 680 280" role="img" xmlns="http://www.w3.org/2000/svg">
-<title>FPGA Design and Verification Banner — Mintaka LLC</title>
-<desc>Dark tech banner showing an FPGA chip with circuit traces, signal waveforms, and the text FPGA Design and Verification for Mintaka LLC</desc>
+<title>FPGA, SDR and Verification Banner - Mintaka LLC</title>
+<desc>Dark tech banner showing an FPGA chip with circuit traces, signal waveforms, and the text FPGA, SDR and Verification for Mintaka LLC</desc>
 <defs>
   <style>
     .banner-bg { fill: #0a0e1a; }
@@ -193,7 +193,7 @@
 <rect x="0" y="218" width="680" height="62" fill="rgba(10,14,26,0.95)"/>
 <line x1="0" y1="218" x2="680" y2="218" stroke="#00b4ff" stroke-width="1" opacity="0.4"/>
 <rect x="30" y="228" width="3" height="36" rx="1" fill="#00b4ff"/>
-<text x="42" y="247" class="heading">FPGA / ASIC</text>
+  <text x="42" y="247" class="heading">FPGA / SDR</text>
 <text x="42" y="265" class="subhead">DESIGN  ·  VERIFICATION  ·  SYNTHESIS</text>
 <rect x="400" y="228" width="54" height="14" rx="2" class="tag"/>
 <text x="427" y="238.5" text-anchor="middle" class="tag-text">RTL</text>
