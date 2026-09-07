@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polyphase FIR — SDR-LIB | Mintaka</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-systemverilog.min.js"></script>
+  <style>
+    :root{--bg:#0d1117;--panel:#161b22;--border:#30363d;--text:#c9d1d9;--muted:#8b949e;--accent:#58a6ff;--green:#3fb950;--gold:#d2991d}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.container{max-width:1200px;margin:auto;padding:40px 24px}.panel{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:28px 32px;margin-bottom:24px}h1{font-size:2rem;line-height:1.2;color:var(--accent);margin:0}h2{font-size:1.18rem;margin:0 0 16px}.subtitle,.note{color:var(--muted)}.subtitle{margin:6px 0 0}.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.badge{border:1px solid var(--border);border-radius:999px;padding:3px 10px;font-size:.76rem;font-weight:600}.sv{color:#79c0ff;background:#1f2a37}.sdr{color:var(--green);background:#1a2f1a}.dsp{color:var(--gold);background:#2a1f1a}.latency{color:#d2a8ff;background:#1f1a2a}.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:22px}.label{color:var(--muted);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}.value{margin-top:3px}.flow{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;font-family:Consolas,monospace}.stage{min-width:150px;padding:11px 15px;border:1px solid var(--border);border-radius:6px;background:var(--bg);text-align:center}.stage strong{color:var(--accent);display:block}.stage span{font-size:.76rem;color:var(--muted)}.arrow{color:var(--muted);font-size:1.2rem}.formula{margin-top:18px;padding:17px;text-align:center;color:#d2a8ff;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-family:Consolas,monospace}table{width:100%;border-collapse:collapse;font-size:.88rem}th,td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}th{font-size:.72rem;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}code{color:var(--gold)}.default{color:var(--green);font-family:Consolas,monospace}.code-section h2{color:var(--text);font-size:1.18rem}.file-icon{margin-right:8px}pre[class*="language-"]{background:var(--bg)!important;border:1px solid var(--border);border-radius:8px;font-size:.8rem;line-height:1.55;max-height:80vh;overflow:auto}code[class*="language-"]{font-family:Consolas,monospace}.footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px;border-top:1px solid var(--border)}a{color:var(--accent)}@media(max-width:768px){.container{padding:18px 12px}.panel{padding:22px 18px}h1{font-size:1.5rem}.flow{flex-direction:column}.arrow{transform:rotate(90deg)}}
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="panel">
+      <h1>Polyphase FIR</h1>
+      <p class="subtitle">Parameterized multirate filter engine for SDR signal-processing paths — SDR-LIB</p>
+      <div class="badges"><span class="badge sv">SystemVerilog IEEE 1800-2017</span><span class="badge sdr">SDR Signal Chain</span><span class="badge dsp">Fixed-Point DSP</span><span class="badge latency">1-Cycle Latency</span></div>
+      <div class="meta"><div><div class="label">Module</div><div class="value">fir_polyphase.sv</div></div><div><div class="label">Author</div><div class="value">Mintaka Engineering Team</div></div><div><div class="label">Version</div><div class="value">1.0.0</div></div><div><div class="label">Copyright</div><div class="value">Mintaka LLC</div></div></div>
+    </section>
+    <section class="panel">
+      <h2>Architecture — Polyphase FIR Data Path</h2>
+      <div class="flow"><div class="stage"><strong>Stage 1</strong><span>Input &amp; phase select</span></div><div class="arrow">→</div><div class="stage"><strong>Stage 2</strong><span>Current + delayed taps</span></div><div class="arrow">→</div><div class="stage"><strong>Stage 3</strong><span>Per-phase MAC</span></div><div class="arrow">→</div><div class="stage"><strong>Stage 4</strong><span>Scale &amp; output</span></div></div>
+      <div class="formula">y[n] = Σ<sub>k=0</sub><sup>T−1</sup> h<sub>phase,k</sub> · x[n−k]</div>
+      <p class="note">The phase input selects one coefficient bank for each accepted sample. Tap 0 uses the current input sample and the remaining taps use the registered sample history. This makes the block suitable for interpolation, decimation and filter-bank structures.</p>
+    </section>
+    <section class="panel"><h2>Parameters</h2><table><thead><tr><th>Parameter</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>kDataWidth</code></td><td class="default">16</td><td>Signed input and output sample width.</td></tr><tr><td><code>kCoeffWidth</code></td><td class="default">16</td><td>Signed coefficient width.</td></tr><tr><td><code>kNumPhases</code></td><td class="default">4</td><td>Independently selectable coefficient phases.</td></tr><tr><td><code>kTapsPerPhase</code></td><td class="default">16</td><td>FIR taps in each phase.</td></tr><tr><td><code>kAccWidth</code></td><td class="default">48</td><td>Full-precision signed MAC accumulator width.</td></tr><tr><td><code>kFracBitsToDrop</code></td><td class="default">kCoeffWidth − 1</td><td>LSBs discarded after MAC to restore the target fixed-point scale.</td></tr></tbody></table></section>
+    <section class="panel"><h2>Port Interface</h2><table><thead><tr><th>Port</th><th>Direction</th><th>Width</th><th>Description</th></tr></thead><tbody><tr><td><code>clk</code></td><td>Input</td><td>1</td><td>Processing clock.</td></tr><tr><td><code>rst_n</code></td><td>Input</td><td>1</td><td>Active-low asynchronous reset.</td></tr><tr><td><code>s_tvalid</code></td><td>Input</td><td>1</td><td>Input sample valid.</td></tr><tr><td><code>s_tready</code></td><td>Output</td><td>1</td><td>Module ready to accept an input sample.</td></tr><tr><td><code>s_tdata</code></td><td>Input</td><td>kDataWidth</td><td>Signed input sample.</td></tr><tr><td><code>s_tphase</code></td><td>Input</td><td>⌈log₂(kNumPhases)⌉</td><td>Selected coefficient phase.</td></tr><tr><td><code>s_tlast</code></td><td>Input</td><td>1</td><td>Input frame marker.</td></tr><tr><td><code>m_tvalid</code></td><td>Output</td><td>1</td><td>Filtered output valid.</td></tr><tr><td><code>m_tready</code></td><td>Input</td><td>1</td><td>Downstream ready signal.</td></tr><tr><td><code>m_tdata</code></td><td>Output</td><td>kDataWidth</td><td>Signed, scaled FIR result.</td></tr><tr><td><code>m_tphase</code></td><td>Output</td><td>⌈log₂(kNumPhases)⌉</td><td>Phase associated with the output sample.</td></tr><tr><td><code>m_tlast</code></td><td>Output</td><td>1</td><td>Forwarded frame marker.</td></tr></tbody></table></section>
+    <section class="code-section"><h2><span class="file-icon">🗄️</span>Source Code — SystemVerilog</h2><pre><code id="source" class="language-systemverilog"></code></pre></section>
+  </main>
+  <footer class="footer">SDR-LIB — <a href="https://mintaka-ai.com/shared/fir_polyphase.html">fir_polyphase.sv v1.0.0</a><br>Mintaka LLC © 2026</footer>
+  <script id="source-text" type="text/plain">// ============================================================================
+// File:         fir_polyphase.sv
+// Project:      FPGA SDR IP Library
+// Description:  Parameterized polyphase FIR filter engine for efficient
+//               interpolation, decimation and filter-bank structures.
+//
+//               One coefficient phase is selected for each accepted input
+//               sample. Tap 0 uses the current sample; remaining taps use the
+//               registered sample history. The full-precision MAC result is
+//               arithmetically scaled before it is narrowed to the output.
+//
+//               Architecture:
+//                 1. AXI-Stream input acceptance and phase selection
+//                 2. Tap-0 current sample plus delayed sample history
+//                 3. Per-phase multiply-accumulate (MAC)
+//                 4. Fixed-point scale and AXI-Stream output registration
+//
+//               Latency: 1 cycle from accepted input to valid output
+//               Interfaces: AXI-Stream-style valid/ready data path
+// ============================================================================
+// Proprietary and Confidential
+// Copyright (c) 2026 Mintaka LLC. All rights reserved.
+// ============================================================================
+// Author:        Mintaka Engineering Team
+// Created:       2026-05-14
+// Version:       1.0.0
+// ============================================================================
+
+`ifndef FIR_POLYPHASE_SV
+`define FIR_POLYPHASE_SV
+
+module fir_polyphase #(
+    parameter int kDataWidth = 16,
+    parameter int kCoeffWidth = 16,
+    parameter int kNumPhases = 4,
+    parameter int kTapsPerPhase = 16,
+    parameter int kAccWidth = 48,
+    parameter int kFracBitsToDrop = kCoeffWidth - 1,
+    parameter logic signed [kCoeffWidth-1:0] kCoeffs [0:kNumPhases-1][0:kTapsPerPhase-1] = '{default:'{default:1}}
+) (
+    input logic clk, input logic rst_n,
+    input logic s_tvalid, output logic s_tready,
+    input logic signed [kDataWidth-1:0] s_tdata,
+    input logic [((kNumPhases > 1) ? $clog2(kNumPhases) : 1)-1:0] s_tphase,
+    input logic s_tlast,
+    output logic m_tvalid, input logic m_tready,
+    output logic signed [kDataWidth-1:0] m_tdata,
+    output logic [((kNumPhases > 1) ? $clog2(kNumPhases) : 1)-1:0] m_tphase,
+    output logic m_tlast
+);
+    logic signed [kDataWidth-1:0] sample_reg [0:kTapsPerPhase-1];
+    logic signed [kAccWidth-1:0] mac_sum, mac_scaled;
+    logic accept_input;
+    localparam int kRequiredAccWidth = kDataWidth + kCoeffWidth + ((kTapsPerPhase > 1) ? $clog2(kTapsPerPhase) : 0);
+    localparam int kShift = (kFracBitsToDrop < 0) ? 0 : kFracBitsToDrop;
+
+    initial begin
+        assert (kDataWidth > 0 && kCoeffWidth > 0 && kNumPhases > 0 && kTapsPerPhase > 0)
+            else $fatal(1, "fir_polyphase: widths, phases and taps must be positive");
+        assert (kFracBitsToDrop >= 0 && kAccWidth >= kRequiredAccWidth)
+            else $fatal(1, "fir_polyphase: invalid fixed-point or accumulator configuration");
+    end
+
+    assign s_tready = ~m_tvalid || m_tready;
+    assign accept_input = s_tvalid && s_tready;
+
+    always_comb begin
+        mac_sum = '0;
+        if (s_tphase < kNumPhases) begin
+            for (int idx = 0; idx < kTapsPerPhase; idx++) begin
+                if (idx == 0)
+                    mac_sum = mac_sum + ($signed(s_tdata) * $signed(kCoeffs[s_tphase][idx]));
+                else
+                    mac_sum = mac_sum + ($signed(sample_reg[idx-1]) * $signed(kCoeffs[s_tphase][idx]));
+            end
+        end
+        mac_scaled = mac_sum >>> kShift;
+    end
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            for (int idx = 0; idx < kTapsPerPhase; idx++) sample_reg[idx] <= '0;
+            m_tvalid <= 1'b0; m_tdata <= '0; m_tphase <= '0; m_tlast <= 1'b0;
+        end else if (accept_input) begin
+            for (int idx = kTapsPerPhase-1; idx > 0; idx--) sample_reg[idx] <= sample_reg[idx-1];
+            sample_reg[0] <= s_tdata;
+            m_tvalid <= 1'b1; m_tdata <= mac_scaled[kDataWidth-1:0];
+            m_tphase <= s_tphase; m_tlast <= s_tlast;
+        end else if (m_tvalid && m_tready) begin
+            m_tvalid <= 1'b0;
+        end
+    end
+endmodule
+
+`endif // FIR_POLYPHASE_SV</script>
+  <script>const source=document.getElementById('source');source.textContent=document.getElementById('source-text').textContent.trim();if(window.Prism)Prism.highlightElement(source);</script>
+</body>
+</html>

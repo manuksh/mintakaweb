@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="assets/images/icon2.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SDR_LIB — A fully parameterized FPGA IP library for Software Defined Radio applications. SystemVerilog IEEE 1800-2017, AXI4-Stream, targeting Zynq-7020." />
-  <title>SDR_LIB — FPGA SDR IP Library | Mintaka LLC</title>
+  <meta name="description" content="SDR-LIB — a working FPGA IP library of synthesizable, configurable blocks for Software Defined Radio systems in the Orion Signal Research Platform." />
+  <title>SDR-LIB — FPGA SDR IP Library | Mintaka</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Bootstrap Icons -->
@@ -21,7 +21,7 @@
   <style>
     .project-hero {
       padding: 8rem 0 3rem;
-      background: linear-gradient(180deg, rgba(0,180,255,0.03) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(62,139,255,0.04) 0%, transparent 100%);
     }
     .project-hero h1 {
       font-size: clamp(2rem, 5vw, 3.5rem);
@@ -81,9 +81,9 @@
       transition: all var(--transition);
     }
     .module-card:hover {
-      border-color: var(--mint-primary);
-      transform: translateY(-3px);
-      box-shadow: 0 4px 20px var(--mint-primary-glow);
+      border-color: var(--mint-border-strong);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
     }
     .module-card i {
       font-size: 1.5rem;
@@ -102,66 +102,24 @@
       color: var(--mint-text-muted);
       margin-bottom: 0;
     }
-
-    /* Roadmap timeline */
-    .roadmap-stage {
-      position: relative;
-      padding-left: 2rem;
-      margin-bottom: 2rem;
-    }
-    .roadmap-stage::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.5rem;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--mint-primary);
-      box-shadow: 0 0 10px var(--mint-primary-glow);
-    }
-    .roadmap-stage::after {
-      content: '';
-      position: absolute;
-      left: 5px;
-      top: 1.5rem;
-      width: 2px;
-      height: calc(100% + 0.5rem);
-      background: var(--mint-border);
-    }
-    .roadmap-stage:last-child::after {
-      display: none;
-    }
-    .roadmap-stage h5 {
-      font-family: var(--font-heading);
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
+    .module-card .module-link {
+      display: inline-block;
+      margin-top: 0.75rem;
       color: var(--mint-primary);
-      margin-bottom: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
     }
-    .roadmap-stage p {
-      font-size: 0.88rem;
-      color: var(--mint-text-muted);
-      margin-bottom: 0.75rem;
-    }
-    .roadmap-modules {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-    .roadmap-module {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      background: rgba(0,180,255,0.1);
-      border: 1px solid rgba(0,180,255,0.2);
-      color: var(--mint-primary);
-      padding: 0.2rem 0.5rem;
-      border-radius: 3px;
+    .module-card .module-link:hover,
+    .module-card .module-link:focus-visible {
+      color: #fff;
+      text-decoration: underline;
     }
 
     /* Code block */
     .code-block {
-      background: #050810;
+      background: #0d1218;
       border: 1px solid var(--mint-border);
       border-radius: 6px;
       padding: 1.25rem;
@@ -189,7 +147,7 @@
       margin-bottom: 0;
     }
     .specs-table th {
-      background: rgba(0,180,255,0.05);
+      background: rgba(62,139,255,0.06);
       font-family: var(--font-heading);
       font-size: 0.72rem;
       letter-spacing: 0.08em;
@@ -207,7 +165,7 @@
     .specs-table code {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.8rem;
-      background: rgba(0,180,255,0.1);
+      background: rgba(62,139,255,0.1);
       color: var(--mint-primary);
       padding: 0.15rem 0.4rem;
       border-radius: 3px;
@@ -236,7 +194,12 @@
         <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-          <li class="nav-item"><a class="nav-link active" href="projects.html">Projects</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects<i class="bi bi-chevron-down ms-1" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item active" href="orion.html">Orion</a></li>
+            </ul>
+          </li>
           <li class="nav-item"><a class="nav-link" href="articles.html">Articles</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
@@ -248,8 +211,8 @@
   <!-- ===== PROJECT HERO ===== -->
   <section class="project-hero">
     <div class="container">
-      <a href="projects.html" class="d-inline-flex align-items-center gap-2 mb-4" style="color:var(--mint-text-muted);font-size:0.85rem;">
-        <i class="bi bi-arrow-left"></i> Back to Projects
+      <a href="orion.html" class="d-inline-flex align-items-center gap-2 mb-4" style="color:var(--mint-text-muted);font-size:0.85rem;">
+        <i class="bi bi-arrow-left"></i> Back to Orion
       </a>
 
       <div class="row align-items-start">
@@ -259,10 +222,11 @@
             <span class="status-badge status-completed">Done</span>
           </div>
 
-          <h1>FPGA SDR IP Library</h1>
+          <h1>SDR-LIB: FPGA IP Library</h1>
           <p class="lead">
-            A comprehensive, fully parameterized FPGA IP library for Software Defined Radio applications.
-            Designed for maximum reusability and composability across Xilinx/AMD and Intel/Altera FPGA platforms.
+            A working, fully parameterized FPGA IP library of synthesizable, configurable blocks for Software
+            Defined Radio systems. Developed by Mintaka as a full FPGA design and verification project, it is
+            designed for reuse and composition across Xilinx/AMD and Intel/Altera FPGA platforms.
           </p>
 
           <div class="project-meta">
@@ -272,7 +236,7 @@
             </div>
             <div class="project-meta-item">
               <i class="bi bi-cpu"></i>
-              <span>Primary Target: Zynq-7020</span>
+              <span>Orion FPGA Platforms</span>
             </div>
             <div class="project-meta-item">
               <i class="bi bi-arrow-left-right"></i>
@@ -280,7 +244,7 @@
             </div>
             <div class="project-meta-item">
               <i class="bi bi-grid-3x3"></i>
-              <span>150+ RTL Modules</span>
+              <span>210+ Synthesizable IP Modules</span>
             </div>
           </div>
         </div>
@@ -294,7 +258,7 @@
                 <span class="tag-badge tag-primary">FPGA</span>
                 <span class="tag-badge tag-primary">SystemVerilog</span>
                 <span class="tag-badge tag-secondary">AXI4-Stream</span>
-                <span class="tag-badge tag-secondary">Zynq-7020</span>
+                <span class="tag-badge tag-secondary">Orion Platform</span>
                 <span class="tag-badge tag-secondary">Vivado</span>
                 <span class="tag-badge tag-secondary">Quartus</span>
                 <span class="tag-badge tag-secondary">cocotb</span>
@@ -310,7 +274,7 @@
   <section class="py-5">
     <div class="container">
       <div class="section-header reveal">
-        <h2>Project Overview</h2>
+        <h2>Overview</h2>
         <div class="section-divider"></div>
       </div>
 
@@ -319,11 +283,18 @@
           <div class="mint-card">
             <div class="card-body">
               <p>
-                <strong class="text-white">SDR_LIB</strong> is a completed in-house FPGA IP library at Mintaka LLC,
-                engineered to provide a production-ready foundation for Software Defined Radio systems.
+                <strong class="text-white">SDR-LIB</strong> is Mintaka's in-house FPGA IP library, actively used
+                across our FPGA, SDR and SatCom engineering services. It provides a production-ready foundation
+                for Software Defined Radio systems.
                 The library covers the entire SDR signal chain — from high-speed ADC/DAC interfaces through digital
                 down/up conversion, filtering, synchronization, modulation/demodulation, forward error correction,
                 and packet processing.
+              </p>
+              <p>
+                It contains <strong class="text-white">210+ synthesizable RTL/IP modules</strong> organized into
+                <strong class="text-white">25 functional groups</strong>: foundational packages and fixed-point math;
+                DSP, synchronization and modulation chains; OFDM and FEC; streaming, CDC, memory, interfaces,
+                control and debug infrastructure.
               </p>
               <p>
                 Every module is written in <strong class="text-white">SystemVerilog IEEE 1800-2017</strong> and uses
@@ -331,11 +302,15 @@
                 seamless composition without glue logic. The library is fully parameterized, supporting various
                 data widths, decimation/interpolation rates, and filter configurations through compile-time parameters.
               </p>
+              <p>
+                <strong class="text-white">Copernicus AI Copilot</strong> helps engineers configure and combine these
+                ready-to-synthesize blocks into SDR system architectures. The engineer remains in control of the
+                architecture, requirements and implementation decisions.
+              </p>
               <p class="mb-0">
-                The primary target platform is the <strong class="text-white">Xilinx Zynq-7020</strong>, with the
-                real-time DSP running in the PL (FPGA fabric) while the PS (ARM Cortex-A9 + FreeRTOS) handles
-                register control, AGC setpoints, packet routing, and higher-layer protocols via AXI-Lite
-                and AXI-Stream DMA interfaces.
+                SDR-LIB works with FPGA hardware platforms in the <strong class="text-white">Orion Signal Research
+                Platform</strong>, where its real-time processing blocks are configured, integrated and evaluated as
+                part of complete SDR communication systems.
               </p>
             </div>
           </div>
@@ -345,7 +320,7 @@
   </section>
 
   <!-- ===== ARCHITECTURE ===== -->
-  <section class="py-5" style="background:rgba(0,180,255,0.02);">
+  <section class="py-5" style="background:rgba(62,139,255,0.03);">
     <div class="container">
       <div class="section-header reveal">
         <h2>System Architecture</h2>
@@ -381,7 +356,7 @@
       <div class="row mt-4 reveal">
         <div class="col-12">
           <h5 style="font-family:var(--font-heading);font-size:0.85rem;letter-spacing:0.05em;color:var(--mint-primary);margin-bottom:1rem;">
-            <i class="bi bi-cpu me-2"></i>ZYNQ-7020 PARTITION
+            <i class="bi bi-cpu me-2"></i>FPGA PLATFORM PARTITION
           </h5>
           <div class="specs-table">
             <table class="table table-dark mb-0">
@@ -393,20 +368,20 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><code>PL (FPGA)</code></td>
-                  <td>Real-time DSP at ADC/DAC sample rate — this IP library</td>
+                  <td><code>FPGA Fabric</code></td>
+                  <td>Real-time SDR processing using SDR-LIB's synthesizable IP blocks</td>
                 </tr>
                 <tr>
-                  <td><code>PS (ARM)</code></td>
-                  <td>Register control, AGC setpoints, packet routing, higher-layer protocols (FreeRTOS)</td>
+                  <td><code>Host / Control</code></td>
+                  <td>Configuration, orchestration, data handling and higher-layer system functions</td>
                 </tr>
                 <tr>
-                  <td><code>AXI-Lite</code></td>
-                  <td>PS writes frequency tuning word, gain, decimation rate to PL registers</td>
+                  <td><code>Control Plane</code></td>
+                  <td>Configuration of frequency, gain, rates and other SDR-LIB block parameters</td>
                 </tr>
                 <tr>
-                  <td><code>AXI-Stream DMA</code></td>
-                  <td>IQ data transfer between PL and PS DDR</td>
+                  <td><code>Data Plane</code></td>
+                  <td>Streaming IQ and packet data between FPGA processing and the system host</td>
                 </tr>
               </tbody>
             </table>
@@ -422,7 +397,7 @@
       <div class="section-header reveal">
         <h2>Module Groups</h2>
         <div class="section-divider"></div>
-        <p>22 functional categories covering the complete SDR IP stack</p>
+        <p>25 functional IP groups covering the complete SDR signal-processing and system-infrastructure stack</p>
       </div>
 
       <div class="row g-3">
@@ -439,6 +414,7 @@
             <i class="bi bi-calculator"></i>
             <h6>Fixed-Point</h6>
             <p>Resize, round, saturate, clip detect, gain, shift operations</p>
+            <a class="module-link" href="shared/fxp_resize.html">View example: fxp_resize.sv <i class="bi bi-arrow-right"></i></a>
           </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 reveal">
@@ -446,6 +422,7 @@
             <i class="bi bi-plus-slash-minus"></i>
             <h6>Complex Math</h6>
             <p>Add, multiply, conjugate, abs², scale, rotate, mix</p>
+            <a class="module-link" href="shared/complex_mult.html">View example: complex_mult.sv <i class="bi bi-arrow-right"></i></a>
           </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 reveal">
@@ -469,6 +446,7 @@
             <i class="bi bi-soundwave"></i>
             <h6>Filters</h6>
             <p>FIR, CIC, halfband, polyphase, boxcar — decimate & interpolate</p>
+            <a class="module-link" href="shared/fir_polyphase.html">View example: fir_polyphase.sv <i class="bi bi-arrow-right"></i></a>
           </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 reveal">
@@ -616,84 +594,6 @@
     </div>
   </section>
 
-  <!-- ===== COMPLETED DEVELOPMENT SCOPE ===== -->
-  <section class="py-5" style="background:rgba(0,180,255,0.02);">
-    <div class="container">
-      <div class="section-header reveal">
-        <h2>Completed Development Scope</h2>
-        <div class="section-divider"></div>
-        <p>Implemented scope from foundation blocks to advanced DSP modules</p>
-      </div>
-
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="reveal">
-            <div class="roadmap-stage">
-              <h5>Stage 1 — Foundation</h5>
-              <p>Core building blocks and infrastructure primitives</p>
-              <div class="roadmap-modules">
-                <span class="roadmap-module">fxp_resize</span>
-                <span class="roadmap-module">fxp_saturate</span>
-                <span class="roadmap-module">complex_add</span>
-                <span class="roadmap-module">complex_mult</span>
-                <span class="roadmap-module">complex_abs2</span>
-                <span class="roadmap-module">stream_fifo</span>
-                <span class="roadmap-module">async_fifo</span>
-                <span class="roadmap-module">nco_dds</span>
-                <span class="roadmap-module">fir_direct</span>
-                <span class="roadmap-module">cic_decimator</span>
-                <span class="roadmap-module">cic_interpolator</span>
-              </div>
-            </div>
-
-            <div class="roadmap-stage">
-              <h5>Stage 2 — SDR Receiver Chain</h5>
-              <p>Complete receive path from ADC to decoded packets</p>
-              <div class="roadmap-modules">
-                <span class="roadmap-module">ddc_core</span>
-                <span class="roadmap-module">power_estimator</span>
-                <span class="roadmap-module">agc_loop</span>
-                <span class="roadmap-module">preamble_correlator</span>
-                <span class="roadmap-module">packet_detector</span>
-                <span class="roadmap-module">crc_checker</span>
-                <span class="roadmap-module">bpsk_demod</span>
-                <span class="roadmap-module">qpsk_demod</span>
-              </div>
-            </div>
-
-            <div class="roadmap-stage">
-              <h5>Stage 3 — SDR Transmitter Chain</h5>
-              <p>Complete transmit path from packets to DAC</p>
-              <div class="roadmap-modules">
-                <span class="roadmap-module">duc_core</span>
-                <span class="roadmap-module">bpsk_mod</span>
-                <span class="roadmap-module">qpsk_mod</span>
-                <span class="roadmap-module">interpolation_fir</span>
-                <span class="roadmap-module">packet_framer</span>
-                <span class="roadmap-module">scrambler</span>
-                <span class="roadmap-module">dac_sample_output</span>
-              </div>
-            </div>
-
-            <div class="roadmap-stage">
-              <h5>Stage 4 — Advanced DSP</h5>
-              <p>Synchronization loops, spectrum processing, and advanced modulation</p>
-              <div class="roadmap-modules">
-                <span class="roadmap-module">costas_loop</span>
-                <span class="roadmap-module">gardner_timing_recovery</span>
-                <span class="roadmap-module">fft_streaming</span>
-                <span class="roadmap-module">polyphase_channelizer</span>
-                <span class="roadmap-module">ofdm_rx</span>
-                <span class="roadmap-module">ofdm_tx</span>
-                <span class="roadmap-module">viterbi_decoder</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ===== CODING STANDARDS ===== -->
   <section class="py-5">
     <div class="container">
@@ -784,8 +684,8 @@ iverilog -f sdr_lib.f</div>
         <a href="contact.html" class="btn btn-primary me-2">
           <i class="bi bi-envelope-fill me-2"></i>Get in Touch
         </a>
-        <a href="projects.html" class="btn btn-ghost">
-          <i class="bi bi-arrow-left me-2"></i>All Projects
+        <a href="orion.html" class="btn btn-ghost">
+          <i class="bi bi-arrow-left me-2"></i>Orion Platform
         </a>
       </div>
     </div>

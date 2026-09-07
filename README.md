@@ -18,7 +18,7 @@ This is a static multi-page website built with HTML5, CSS3, JavaScript, and Boot
 |------|------|-------------|
 | Home | `index.html` | Hero, Why Mintaka, Latest Article |
 | Services | `services.html` | FPGA Design, SDR Design, Verification, Bring-Up |
-| Projects | `projects.html` | FPGA, SDR, and verification projects |
+| Projects ▸ Orion | `orion.html` | Orion platform: FPGA, SDR, and verification projects |
 | Contact | `contact.html` | Contact form + company info |
 
 ---
@@ -28,7 +28,7 @@ This is a static multi-page website built with HTML5, CSS3, JavaScript, and Boot
 - **HTML5** — semantic markup
 - **Bootstrap 5.3** — grid, components, responsive layout (CDN)
 - **Bootstrap Icons 1.11** — icon set (CDN)
-- **Google Fonts** — Orbitron (headings) + Inter (body) (CDN)
+- **Google Fonts** — Inter (UI/body) + JetBrains Mono (tags, code) (CDN)
 - **Vanilla JavaScript** — form validation, scroll-reveal, navbar effects
 - **SVG** — custom FPGA/waveform banner graphic
 
@@ -42,7 +42,7 @@ No npm. No build step. No bundler.
 mintakaam/
 ├── index.html          # Home page
 ├── services.html       # Services page
-├── projects.html       # Projects / Portfolio page
+├── orion.html           # Orion platform page
 ├── contact.html        # Contact page
 ├── css/
 │   └── style.css       # Custom theme (Bootstrap overrides, dark tech style)
@@ -58,10 +58,10 @@ mintakaam/
 
 ## Design
 
-- **Style:** Dark tech / futuristic
-- **Colors:** Near-black background `#0a0e1a`, electric-blue accent `#00b4ff`, teal highlight `#00ffcc`
-- **Fonts:** Orbitron (geometric, techy headings) + Inter (clean body text)
-- **Effects:** Circuit-board grid background, scroll-reveal animations, glow hover effects on cards
+- **Style:** Enterprise dark — restrained, high-contrast, engineering-grade
+- **Colors:** Graphite-blue background `#0b0f14`, surfaces `#11161d`, single accent blue `#3e8bff`
+- **Fonts:** Inter (headings + body) + JetBrains Mono (tags, code, technical labels)
+- **Effects:** Subtle elevation shadows, gentle scroll-reveal (respects `prefers-reduced-motion`), strict focus states
 - **Responsive:** Mobile-first via Bootstrap 5 grid
 
 ---

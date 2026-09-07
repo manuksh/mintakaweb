@@ -12,7 +12,7 @@
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 40) {
-      navbar.style.boxShadow = '0 4px 24px rgba(0,180,255,0.12)';
+      navbar.style.boxShadow = '0 1px 0 rgba(255,255,255,0.04), 0 8px 24px rgba(0,0,0,0.35)';
     } else {
       navbar.style.boxShadow = 'none';
     }

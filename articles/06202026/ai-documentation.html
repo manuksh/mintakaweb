@@ -9,7 +9,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Bootstrap Icons -->
@@ -117,7 +117,7 @@
       font-style: italic;
     }
     .article-body pre {
-      background: #0a0e1a;
+      background: #0d1218;
       border: 1px solid var(--mint-border);
       border-radius: 6px;
       padding: 1.5rem;
@@ -160,7 +160,7 @@
       text-align: left;
     }
     .article-body th {
-      background: rgba(0, 180, 255, 0.1);
+      background: rgba(62,139,255,0.08);
       color: #ffffff;
       font-weight: 600;
     }
@@ -178,14 +178,14 @@
     .article-tag {
       display: inline-block;
       padding: 0.35rem 0.85rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      background: rgba(0, 198, 166, 0.15);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      background: var(--mint-primary-soft);
       color: var(--mint-accent);
-      border: 1px solid rgba(0, 198, 166, 0.3);
+      border: 1px solid rgba(62,139,255,0.35);
     }
     .article-navigation {
       display: flex;
@@ -224,8 +224,8 @@
       color: var(--mint-accent);
     }
     .highlight-box {
-      background: rgba(0, 180, 255, 0.08);
-      border: 1px solid rgba(0, 180, 255, 0.3);
+      background: rgba(62,139,255,0.08);
+      border: 1px solid rgba(62,139,255,0.35);
       border-left: 3px solid var(--mint-primary);
       border-radius: 6px;
       padding: 1.5rem;
@@ -296,7 +296,12 @@
         <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
           <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="../../services.html">Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="../../projects.html">Projects</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects<i class="bi bi-chevron-down ms-1" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../../orion.html">Orion</a></li>
+            </ul>
+          </li>
           <li class="nav-item"><a class="nav-link active" href="../../articles.html">Articles</a></li>
           <li class="nav-item"><a class="nav-link" href="../../about.html">About</a></li>
           <li class="nav-item"><a class="nav-link" href="../../contact.html">Contact</a></li>

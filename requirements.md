@@ -21,7 +21,7 @@ The website is **multi-page** (separate HTML files per section):
 |------|------|-------------|
 | Home / Hero | `index.html` | Landing page with hero banner, company name, tagline, CTA |
 | Services | `services.html` | Detailed list of offered engineering services |
-| Projects | `projects.html` | Portfolio of past FPGA/ASIC projects |
+| Orion | `orion.html` | Orion platform & portfolio of FPGA/ASIC projects |
 | Contact | `contact.html` | Contact form for visitor inquiries |
 
 ---
@@ -46,7 +46,7 @@ The website is **multi-page** (separate HTML files per section):
 
 - Fixed to top (`fixed-top`) across all pages  
 - Left: Mintaka logo (img, height ~40px, white/inverted)  
-- Right: nav links — Home | Services | Projects | Contact  
+- Right: nav links — Home | Services | Projects (dropdown: Orion) | Contact  
 - Active page uses Bootstrap `.active` class on the nav link  
 - Mobile: Bootstrap hamburger toggler (`navbar-toggler`) collapses into offcanvas or dropdown menu  
 - Background: semi-transparent dark with `backdrop-filter: blur` for glassmorphism effect  
@@ -94,7 +94,7 @@ Four service cards in a responsive Bootstrap grid:
 
 Card styling: dark background (`bg-dark`), custom glowing blue border on hover, Bootstrap `h-100` for equal height.
 
-### 5.3 Projects / Portfolio (`projects.html`)
+### 5.3 Projects / Portfolio (`orion.html`)
 
 **Bootstrap components used:** `card`, `badge`, `row row-cols-1 row-cols-md-3`, `g-4` gutter
 
@@ -172,7 +172,7 @@ Form fields (all required):
 mintakaam/
 ├── index.html          # Home / Hero page
 ├── services.html       # Services page
-├── projects.html       # Projects / Portfolio page
+├── orion.html           # Projects / Portfolio page
 ├── contact.html        # Contact page
 ├── css/
 │   └── style.css       # Custom styles (loaded after Bootstrap CDN)
@@ -228,7 +228,7 @@ mintakaam/
 Items to be replaced before launch:
 
 - [ ] Place logo file at `assets/images/logo.png`  
-- [ ] Real project descriptions and titles in `projects.html`  
+- [ ] Real project descriptions and titles in `orion.html`  
 - [ ] Company contact email address in `contact.html`  
 - [ ] Company LinkedIn / social media URL in footer  
 - [ ] Favicon (`favicon.ico`) generated from logo  

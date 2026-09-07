@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>complex_mult.sv — SDR-LIB | Mintaka</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-systemverilog.min.js"></script>
+  <style>
+    :root { --bg:#0d1117; --surface:#161b22; --border:#30363d; --text:#c9d1d9; --muted:#8b949e; --accent:#58a6ff; --green:#3fb950; --gold:#d2991d; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { background:var(--bg); color:var(--text); font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    .container { max-width:1200px; margin:0 auto; padding:40px 24px; }
+    .panel { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:28px 32px; margin-bottom:24px; }
+    h1 { color:var(--accent); font-size:2rem; line-height:1.2; } h2 { font-size:1.18rem; margin-bottom:16px; }
+    .subtitle,.note { color:var(--muted); } .subtitle { margin-top:6px; } .note { font-size:.9rem; margin-top:14px; }
+    .badges { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+    .badge { border:1px solid var(--border); border-radius:999px; padding:3px 10px; font-size:.76rem; font-weight:600; }
+    .badge-sv { color:#79c0ff; background:#1f2a37; } .badge-dsp { color:var(--gold); background:#2a1f1a; } .badge-sdr { color:var(--green); background:#1a2f1a; } .badge-comb { color:#d2a8ff; background:#1f1a2a; }
+    .meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin-top:22px; }
+    .label { color:var(--muted); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; } .value { margin-top:3px; font-size:.93rem; }
+    .flow { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px; font-family:Consolas,monospace; }
+    .stage { min-width:154px; padding:11px 15px; border:1px solid var(--border); border-radius:6px; background:#0d1117; text-align:center; }
+    .stage strong { color:var(--accent); display:block; } .stage span { color:var(--muted); font-size:.76rem; } .arrow { color:var(--muted); font-size:1.2rem; }
+    table { width:100%; border-collapse:collapse; font-size:.88rem; } th,td { padding:10px 12px; border-bottom:1px solid var(--border); text-align:left; vertical-align:top; }
+    th { color:var(--muted); font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; } td code { color:var(--gold); } .default { color:var(--green); font-family:Consolas,monospace; }
+    .formula { border:1px solid var(--border); background:#0d1117; border-radius:6px; padding:18px; color:#d2a8ff; font:1rem/1.7 Consolas,monospace; text-align:center; }
+    pre[class*="language-"] { background:#0d1117!important; border:1px solid var(--border); border-radius:8px; font-size:.8rem; line-height:1.55; max-height:80vh; overflow:auto; }
+    .footer { color:var(--muted); text-align:center; font-size:.8rem; padding:20px; border-top:1px solid var(--border); } a { color:var(--accent); }
+    @media (max-width:768px) { .container { padding:18px 12px; } .panel { padding:22px 18px; } h1 { font-size:1.5rem; } .flow { flex-direction:column; } .arrow { transform:rotate(90deg); } }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="panel">
+      <h1>📄 complex_mult.sv</h1>
+      <p class="subtitle">Parameterized complex multiplier for SDR I/Q signal paths — SDR-LIB</p>
+      <div class="badges"><span class="badge badge-sv">SystemVerilog IEEE 1800-2017</span><span class="badge badge-sdr">SDR Signal Chain</span><span class="badge badge-dsp">Fixed-Point DSP</span><span class="badge badge-comb">Combinational Logic</span></div>
+      <div class="meta">
+        <div><div class="label">Author</div><div class="value">Mintaka Engineering Team</div></div>
+        <div><div class="label">Created</div><div class="value">2026-05-14</div></div>
+        <div><div class="label">Version</div><div class="value">1.0.0</div></div>
+        <div><div class="label">Copyright</div><div class="value">Mintaka LLC</div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Architecture — Complex Multiply and Scale</h2>
+      <div class="flow">
+        <div class="stage"><strong>Stage 1</strong><span>Four signed products</span></div><div class="arrow">→</div>
+        <div class="stage"><strong>Stage 2</strong><span>Real / imaginary sum</span></div><div class="arrow">→</div>
+        <div class="stage"><strong>Stage 3</strong><span>Fixed-point scale</span></div><div class="arrow">→</div>
+        <div class="stage"><strong>Stage 4</strong><span>Overflow &amp; saturation</span></div>
+      </div>
+      <div class="formula">(a<sub>re</sub> + j·a<sub>im</sub>) · (b<sub>re</sub> + j·b<sub>im</sub>) = (a<sub>re</sub>b<sub>re</sub> − a<sub>im</sub>b<sub>im</sub>) + j(a<sub>re</sub>b<sub>im</sub> + a<sub>im</sub>b<sub>re</sub>)</div>
+      <p class="note">Four signed products form the complex result. An arithmetic right shift restores the selected fixed-point scale; each I/Q output is independently checked and optionally clamped.</p>
+    </section>
+
+    <section class="panel"><h2>Parameters</h2><table><thead><tr><th>Parameter</th><th>Default</th><th>Description</th></tr></thead><tbody>
+      <tr><td><code>kDataWidth</code></td><td class="default">16</td><td>Signed input width for every I and Q component.</td></tr>
+      <tr><td><code>kOutWidth</code></td><td class="default">16</td><td>Signed output width for the real and imaginary results.</td></tr>
+      <tr><td><code>kFracBitsToDrop</code></td><td class="default">15</td><td>Product fractional bits removed to restore the output Q-format.</td></tr>
+      <tr><td><code>kEnableSaturation</code></td><td class="default">1'b1</td><td>Clamps each component to the signed output range on overflow.</td></tr>
+    </tbody></table></section>
+
+    <section class="panel"><h2>Interface</h2><table><thead><tr><th>Signal</th><th>Direction</th><th>Description</th></tr></thead><tbody>
+      <tr><td><code>a_re, a_im</code></td><td>Input</td><td>First complex signed fixed-point sample.</td></tr>
+      <tr><td><code>b_re, b_im</code></td><td>Input</td><td>Second complex signed fixed-point sample.</td></tr>
+      <tr><td><code>y_re, y_im</code></td><td>Output</td><td>Scaled complex product.</td></tr>
+      <tr><td><code>overflow_re, overflow_im</code></td><td>Output</td><td>Asserted when the corresponding scaled result exceeds the output range.</td></tr>
+      <tr><td><code>saturated_re, saturated_im</code></td><td>Output</td><td>Asserted when saturation is enabled and the corresponding result is clamped.</td></tr>
+    </tbody></table></section>
+
+    <section class="panel"><h2>Implementation source</h2><pre><code id="source" class="language-systemverilog"></code></pre></section>
+  </main>
+  <footer class="footer">SDR-LIB — <a href="https://mintaka-ai.com/shared/complex_mult.html">complex_mult.sv v1.0.0</a><br>Mintaka LLC © 2026</footer>
+  <script id="source-text" type="text/plain">// ============================================================================
+// File:         complex_mult.sv
+// Project:      FPGA SDR IP Library
+// Description:  Complex multiply: (a_re + j*a_im) * (b_re + j*b_im).
+//
+//               Implements the standard complex product:
+//                 y_re = a_re*b_re - a_im*b_im
+//                 y_im = a_re*b_im + a_im*b_re
+//
+//               Four full-precision signed products are scaled to the target
+//               fixed-point format. Real and imaginary outputs have independent
+//               overflow reporting and optional saturation.
+//
+//               Latency: 0 cycles (purely combinational)
+//               Use cases: frequency translation, complex mixing, phase
+//                          rotation, channel equalization and I/Q processing.
+// ============================================================================
+
+`ifndef COMPLEX_MULT_SV
+`define COMPLEX_MULT_SV
+
+module complex_mult
+    import sdr_types_pkg::*;
+    import sdr_params_pkg::*;
+#(
+    // Width of every signed real/imaginary input component.
+    parameter int kDataWidth         = 16,
+    // Width of each signed real/imaginary output component after scaling.
+    parameter int kOutWidth          = 16,
+    // Product LSBs discarded to restore the target fixed-point format.
+    parameter int kFracBitsToDrop    = 15,
+    // Clamp out-of-range results instead of allowing wraparound.
+    parameter bit kEnableSaturation  = 1'b1
+) (
+    // First complex input: a = a_re + j*a_im.
+    input  logic signed [kDataWidth-1:0] a_re,
+    input  logic signed [kDataWidth-1:0] a_im,
+    // Second complex input: b = b_re + j*b_im.
+    input  logic signed [kDataWidth-1:0] b_re,
+    input  logic signed [kDataWidth-1:0] b_im,
+    // Complex result: y = y_re + j*y_im.
+    output logic signed [kOutWidth-1:0]  y_re,
+    output logic signed [kOutWidth-1:0]  y_im,
+    // Asserted when the scaled component is outside the output range.
+    output logic                         overflow_re,
+    output logic                         overflow_im,
+    // Asserted only when saturation is enabled and clamping is applied.
+    output logic                         saturated_re,
+    output logic                         saturated_im
+);
+
+    // A product needs 2*kDataWidth bits; the product sum needs one more bit.
+    localparam int kProdWidth = 2 * kDataWidth;
+    localparam int kSumWidth  = kProdWidth + 1;
+    localparam int kShift     = (kFracBitsToDrop < 0) ? 0 : kFracBitsToDrop;
+
+    // Signed output bounds used for overflow comparison and saturation.
+    localparam logic signed [kOutWidth-1:0] kMaxVal = {1'b0, {(kOutWidth-1){1'b1}}};
+    localparam logic signed [kOutWidth-1:0] kMinVal = {1'b1, {(kOutWidth-1){1'b0}}};
+
+    // Four full-precision terms required by complex multiplication.
+    logic signed [kProdWidth-1:0] ac;
+    logic signed [kProdWidth-1:0] bd;
+    logic signed [kProdWidth-1:0] ad;
+    logic signed [kProdWidth-1:0] bc;
+    logic signed [kSumWidth-1:0]  re_full;
+    logic signed [kSumWidth-1:0]  im_full;
+    logic signed [kSumWidth-1:0]  re_scaled;
+    logic signed [kSumWidth-1:0]  im_scaled;
+    logic signed [kSumWidth-1:0]  max_ext;
+    logic signed [kSumWidth-1:0]  min_ext;
+
+    always_comb begin
+        // Stage 1: form all four signed products.
+        ac = a_re * b_re;
+        bd = a_im * b_im;
+        ad = a_re * b_im;
+        bc = a_im * b_re;
+
+        // Stage 2: reconstruct the complex product with explicit sign extension.
+        re_full = $signed({ac[kProdWidth-1], ac}) - $signed({bd[kProdWidth-1], bd});
+        im_full = $signed({ad[kProdWidth-1], ad}) + $signed({bc[kProdWidth-1], bc});
+
+        // Stage 3: restore fractional precision; discarded bits are truncated.
+        re_scaled = re_full >>> kShift;
+        im_scaled = im_full >>> kShift;
+
+        // Stage 4: compare against output bounds before narrowing each result.
+        max_ext = {{(kSumWidth-kOutWidth){kMaxVal[kOutWidth-1]}}, kMaxVal};
+        min_ext = {{(kSumWidth-kOutWidth){kMinVal[kOutWidth-1]}}, kMinVal};
+
+        overflow_re  = (re_scaled > max_ext) || (re_scaled < min_ext);
+        overflow_im  = (im_scaled > max_ext) || (im_scaled < min_ext);
+        saturated_re = 1'b0;
+        saturated_im = 1'b0;
+
+        // Apply the saturation policy independently to the real component.
+        if (kEnableSaturation && (re_scaled > max_ext)) begin
+            y_re = kMaxVal;
+            saturated_re = 1'b1;
+        end else if (kEnableSaturation && (re_scaled < min_ext)) begin
+            y_re = kMinVal;
+            saturated_re = 1'b1;
+        end else begin
+            y_re = re_scaled[kOutWidth-1:0];
+        end
+
+        // Apply the same policy independently to the imaginary component.
+        if (kEnableSaturation && (im_scaled > max_ext)) begin
+            y_im = kMaxVal;
+            saturated_im = 1'b1;
+        end else if (kEnableSaturation && (im_scaled < min_ext)) begin
+            y_im = kMinVal;
+            saturated_im = 1'b1;
+        end else begin
+            y_im = im_scaled[kOutWidth-1:0];
+        end
+    end
+
+endmodule
+
+`endif // COMPLEX_MULT_SV</script>
+  <script>
+    const source = document.getElementById('source');
+    source.textContent = document.getElementById('source-text').textContent.trim();
+    if (window.Prism) Prism.highlightElement(source);
+  </script>
+</body>
+</html>

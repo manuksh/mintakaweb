@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="assets/images/icon2.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Articles about FPGA design, SDR design, verification, and engineering automation from Mintaka LLC." />
+  <meta name="description" content="Articles on SatCom, DSP, SDR and RF telecommunications — signal processing, FPGA implementation and engineering practice from Mintaka LLC." />
   <title>Articles - Mintaka LLC</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Bootstrap Icons -->
@@ -29,10 +29,10 @@
       margin-bottom: 3rem;
     }
     .articles-title {
-      font-family: var(--font-orbitron);
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--mint-text);
+      font-family: var(--font-heading);
+      font-size: 2.25rem;
+      font-weight: 600;
+      color: #f5f7fa;
       margin-bottom: 1rem;
     }
     .articles-subtitle {
@@ -42,28 +42,28 @@
       margin: 0 auto;
     }
     .article-card {
-      background: rgba(255,255,255,0.03);
+      background: var(--mint-bg-card);
       border: 1px solid var(--mint-border);
-      border-radius: 12px;
+      border-radius: 8px;
       padding: 2rem;
       height: 100%;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
     }
     .article-card:hover {
-      border-color: var(--mint-accent);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0, 198, 166, 0.15);
+      border-color: var(--mint-border-strong);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
     }
     .article-card-icon {
       font-size: 2rem;
-      color: var(--mint-accent);
+      color: var(--mint-primary);
       margin-bottom: 1rem;
     }
     .article-card-title {
-      font-family: var(--font-orbitron);
+      font-family: var(--font-heading);
       font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--mint-text);
+      font-weight: 600;
+      color: #f5f7fa;
       margin-bottom: 0.75rem;
     }
     .article-card-excerpt {
@@ -102,16 +102,16 @@
     .tag-badge {
       display: inline-block;
       padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
     }
     .tag-badge-primary {
-      background: rgba(0, 198, 166, 0.15);
+      background: var(--mint-primary-soft);
       color: var(--mint-accent);
-      border: 1px solid rgba(0, 198, 166, 0.3);
+      border: 1px solid rgba(62,139,255,0.35);
     }
     .tag-badge-secondary {
       background: rgba(255,255,255,0.08);
@@ -127,6 +127,13 @@
       font-size: 3rem;
       color: var(--mint-border);
       margin-bottom: 1rem;
+    }
+    .topic-strip {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
     }
   </style>
 </head>
@@ -152,7 +159,12 @@
         <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects<i class="bi bi-chevron-down ms-1" aria-hidden="true"></i></a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="orion.html">Orion</a></li>
+            </ul>
+          </li>
           <li class="nav-item"><a class="nav-link active" href="articles.html">Articles</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
@@ -169,8 +181,18 @@
       <div class="articles-header reveal">
         <h1 class="articles-title">Articles</h1>
         <p class="articles-subtitle">
-          Insights on FPGA design, SDR design, verification, and engineering automation.
+          Notes from our engineering work. Here we publish articles on SatCom, DSP, SDR
+          and RF telecommunications — the systems we design, simulate and verify:
+          signal-processing algorithms, their FPGA implementation, and what we learn
+          bringing them to life.
         </p>
+        <div class="topic-strip">
+          <span class="tag-badge tag-badge-primary">SatCom</span>
+          <span class="tag-badge tag-badge-primary">DSP</span>
+          <span class="tag-badge tag-badge-primary">SDR</span>
+          <span class="tag-badge tag-badge-primary">RF</span>
+          <span class="tag-badge tag-badge-secondary">FPGA</span>
+        </div>
       </div>
 
       <!-- Articles Grid -->
