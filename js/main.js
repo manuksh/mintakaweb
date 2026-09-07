@@ -48,7 +48,7 @@
   if (!emailLink || !emailText) return;
 
   // Build email from parts so it's not in the HTML source
-  const parts = ['info', '@', 'mintaka', '-', 'ai', '.', 'com'];
+  const parts = ['info', '@', 'mintaka', '.', 'am'];
   const email = parts.join('');
   emailLink.href = 'mail' + 'to:' + email;
   emailText.textContent = email;
@@ -140,9 +140,24 @@
       // Record submission time for rate limiting
       lastSubmitTime = Date.now();
 
+      // Open a prefilled email draft in the visitor's default email client.
+      const recipient = ['info', '@', 'mintaka', '.', 'am'].join('');
+      const cleanHeader = (value) => value.trim().replace(/[\r\n]+/g, ' ');
+      const subject = 'Website enquiry from ' + cleanHeader(name.value);
+      const body = [
+        'Name: ' + cleanHeader(name.value),
+        'Email: ' + cleanHeader(email.value),
+        '',
+        'Message:',
+        message.value.trim(),
+      ].join('\r\n');
+      window.location.href = 'mailto:' + recipient
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(body);
+
       // Disable button temporarily
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>Sent!';
+      submitBtn.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>Email Draft Opened';
 
       // Show success alert
       if (successAlert) {
@@ -158,7 +173,7 @@
       // Re-enable button after cooldown
       setTimeout(() => {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="bi bi-send-fill me-2"></i>Send Message';
+        submitBtn.innerHTML = '<i class="bi bi-send-fill me-2"></i>Send via Email';
       }, COOLDOWN_MS);
     }
   });
